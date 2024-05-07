@@ -16,14 +16,14 @@ class SearchViewController: UIViewController {
         let spacing: CGFloat = 10
         let deviceWidth = UIScreen.main.bounds.width
         let countForLine: CGFloat = 2 // 한 줄에 넣고 싶은 아이템 개수
-        let itemWidth = (deviceWidth - (spacing * (countForLine - 1)) - 1) / countForLine
-        // 한 줄에 2개; [사진](10)[사진]
+        let itemWidth = (deviceWidth - 20 - (spacing * (countForLine - 1)) - 1) / countForLine
+        // 한 줄에 2개; (10)[사진](10)[사진](10)
         // 1을 빼는 이유: 부동소수점 때문에 itemWidth가 실제보다 크게 나올 수 있기 때문
         
         layout.scrollDirection = .vertical // default: vertical
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
-        layout.itemSize = .init(width: itemWidth, height: itemWidth + 40)
+        layout.itemSize = .init(width: itemWidth, height: itemWidth + 60)
         layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         return layout
     }()
@@ -73,6 +73,8 @@ extension SearchViewController: UICollectionViewDataSource {
             withReuseIdentifier: SearchCollectionViewCell.identifier,
             for: indexPath) as? SearchCollectionViewCell 
         else { return UICollectionViewCell() }
+        cell.setConstraints()
+        cell.configureUI()
         return cell
     }
     
