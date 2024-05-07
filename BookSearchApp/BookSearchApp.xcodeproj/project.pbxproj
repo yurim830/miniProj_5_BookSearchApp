@@ -17,6 +17,7 @@
 		1ADF02D52BEA40BF00311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF02D42BEA40BF00311F97 /* SnapKit */; };
 		1ADF02D72BEA52F100311F97 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02D62BEA52F100311F97 /* SearchCollectionViewCell.swift */; };
 		1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02D92BEA8F1B00311F97 /* Colors.swift */; };
+		1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1ADF02D62BEA52F100311F97 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		1ADF02D92BEA8F1B00311F97 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +66,12 @@
 		1ADF02B62BEA074B00311F97 /* BookSearchApp */ = {
 			isa = PBXGroup;
 			children = (
+				1ADF02DC2BEAA0CF00311F97 /* Model */,
+				1ADF02DD2BEAA0D800311F97 /* View */,
+				1ADF02DB2BEAA0AC00311F97 /* ViewModel */,
 				1ADF02B72BEA074B00311F97 /* AppDelegate.swift */,
 				1ADF02B92BEA074B00311F97 /* SceneDelegate.swift */,
-				1ADF02D82BEA52FA00311F97 /* SearchView */,
-				1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */,
 				1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */,
-				1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */,
-				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
 				1ADF02C02BEA074E00311F97 /* Assets.xcassets */,
 				1ADF02C52BEA074E00311F97 /* Info.plist */,
 			);
@@ -84,6 +85,40 @@
 				1ADF02D62BEA52F100311F97 /* SearchCollectionViewCell.swift */,
 			);
 			path = SearchView;
+			sourceTree = "<group>";
+		};
+		1ADF02DB2BEAA0AC00311F97 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02DE2BEAA0EF00311F97 /* Network */,
+				1ADF02D82BEA52FA00311F97 /* SearchView */,
+				1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */,
+				1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1ADF02DC2BEAA0CF00311F97 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1ADF02DD2BEAA0D800311F97 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1ADF02DE2BEAA0EF00311F97 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +199,7 @@
 				1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */,
 				1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */,
 				1ADF02D02BEA07B700311F97 /* BottomTabBarController.swift in Sources */,
+				1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */,
 				1ADF02CE2BEA07A400311F97 /* WishListViewController.swift in Sources */,
 				1ADF02D22BEA3D5700311F97 /* DetailViewController.swift in Sources */,
 				1ADF02B82BEA074B00311F97 /* AppDelegate.swift in Sources */,
