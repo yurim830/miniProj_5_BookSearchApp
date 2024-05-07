@@ -10,6 +10,7 @@ import SnapKit
 
 class SearchViewController: UIViewController {
     let bookSearchBar = UISearchBar()
+    lazy var searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
     let collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 10
@@ -26,11 +27,17 @@ class SearchViewController: UIViewController {
         layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         return layout
     }()
-    lazy var resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
+        setCollectionView()
+    }
+    
+    func setCollectionView() {
+        searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
+        searchCollectionView.dataSource = self
     }
     
     func setConstraints() {
@@ -43,7 +50,7 @@ class SearchViewController: UIViewController {
             }
         }
         
-        [resultCollectionView].forEach {
+        [searchCollectionView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
@@ -53,5 +60,21 @@ class SearchViewController: UIViewController {
             }
         }
     }
+    
+}
+
+extension SearchViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SearchCollectionViewCell.identifier,
+            for: indexPath) as? SearchCollectionViewCell 
+        else { return UICollectionViewCell() }
+        return cell
+    }
+    
     
 }
