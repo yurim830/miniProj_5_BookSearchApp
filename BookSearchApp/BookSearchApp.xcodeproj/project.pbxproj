@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		1ADF02B82BEA074B00311F97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02B72BEA074B00311F97 /* AppDelegate.swift */; };
 		1ADF02BA2BEA074B00311F97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02B92BEA074B00311F97 /* SceneDelegate.swift */; };
-		1ADF02BF2BEA074B00311F97 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1ADF02BE2BEA074B00311F97 /* Base */; };
 		1ADF02C12BEA074E00311F97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ADF02C02BEA074E00311F97 /* Assets.xcassets */; };
-		1ADF02C42BEA074E00311F97 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1ADF02C32BEA074E00311F97 /* Base */; };
 		1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02CB2BEA079900311F97 /* SearchViewController.swift */; };
 		1ADF02CE2BEA07A400311F97 /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */; };
 		1ADF02D02BEA07B700311F97 /* BottomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */; };
@@ -22,9 +20,7 @@
 		1ADF02B42BEA074B00311F97 /* BookSearchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSearchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ADF02B72BEA074B00311F97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ADF02B92BEA074B00311F97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1ADF02BE2BEA074B00311F97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1ADF02C02BEA074E00311F97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1ADF02C32BEA074E00311F97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ADF02C52BEA074E00311F97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ADF02CB2BEA079900311F97 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
@@ -68,9 +64,7 @@
 				1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */,
 				1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */,
 				1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */,
-				1ADF02BD2BEA074B00311F97 /* Main.storyboard */,
 				1ADF02C02BEA074E00311F97 /* Assets.xcassets */,
-				1ADF02C22BEA074E00311F97 /* LaunchScreen.storyboard */,
 				1ADF02C52BEA074E00311F97 /* Info.plist */,
 			);
 			path = BookSearchApp;
@@ -135,8 +129,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADF02C12BEA074E00311F97 /* Assets.xcassets in Resources */,
-				1ADF02C42BEA074E00311F97 /* Base in Resources */,
-				1ADF02BF2BEA074B00311F97 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,25 +149,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		1ADF02BD2BEA074B00311F97 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1ADF02BE2BEA074B00311F97 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		1ADF02C22BEA074E00311F97 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1ADF02C32BEA074E00311F97 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1ADF02C62BEA074E00311F97 /* Debug */ = {
@@ -308,7 +281,6 @@
 				INFOPLIST_FILE = BookSearchApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -335,7 +307,6 @@
 				INFOPLIST_FILE = BookSearchApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
