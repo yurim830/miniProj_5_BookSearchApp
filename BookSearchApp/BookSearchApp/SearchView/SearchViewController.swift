@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
         layout.scrollDirection = .vertical // default: vertical
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
-        layout.itemSize = .init(width: itemWidth, height: itemWidth + 60)
+        layout.itemSize = .init(width: itemWidth, height: itemWidth * 1.2)
         layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         return layout
     }()
