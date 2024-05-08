@@ -46,13 +46,17 @@ class SearchViewController: UIViewController {
         //fetchLibraryData(query: "과자")
     }
     
-    // MARK: - custom 함수
-    
+    // MARK: - 기능 설정 함수
+    // 검색 기능
     func conductSearch() {
         let searchKeyword = bookSearchBar.searchTextField.text ?? ""
         fetchLibraryData(query: searchKeyword)
     }
     
+    // MARK: - 키보드 관련 함수
+    
+    
+    // MARK: - 레이아웃 설정 함수
     func setCollectionView() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         searchCollectionView.dataSource = self
@@ -106,7 +110,7 @@ class SearchViewController: UIViewController {
         }
     }
     
-    
+    // MARK: - 네트워크 함수
     func fetchLibraryData(query: String) {
         APIManager.shared.fetchLibraryData(query: query) { libraryResult in
             self.library = libraryResult
@@ -142,3 +146,13 @@ extension SearchViewController: UICollectionViewDataSource {
     
     
 }
+
+//extension SearchViewController: UISearchBarDelegate {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        print("hhhhhhh")
+//        conductSearch()
+//        searchBar.resignFirstResponder()
+//    }
+//    
+//}
+
