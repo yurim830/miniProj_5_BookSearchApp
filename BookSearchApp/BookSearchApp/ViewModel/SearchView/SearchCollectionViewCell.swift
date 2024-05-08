@@ -12,7 +12,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
     
     static let identifier = String(describing: SearchCollectionViewCell.self)
     
-    // UIComponents
+    // MARK: - UIComponents
     let bookImage = UIImageView()
     let infoView = UIView()
     let bookTitleLabel = UILabel()
@@ -20,11 +20,11 @@ class SearchCollectionViewCell: UICollectionViewCell {
     let bookPublisherLabel = UILabel()
     
     
+    // MARK: - 레이아웃 설정
     func setConstraints() {
         [bookImage, infoView].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
-            
         }
         
         // 책 이미지 레이아웃
@@ -45,15 +45,17 @@ class SearchCollectionViewCell: UICollectionViewCell {
             }
         }
         
+        // 책 제목
         bookTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(8)
         }
         
-        
+        // 작가
         bookAuthorLabel.snp.makeConstraints {
             $0.top.equalTo(bookTitleLabel.snp.bottom).offset(1)
         }
         
+        // 출판사
         bookPublisherLabel.snp.makeConstraints {
             $0.top.equalTo(bookAuthorLabel.snp.bottom).offset(1)
             $0.bottom.equalToSuperview().inset(5)
@@ -76,7 +78,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
                 print("image error: \(error)")
             }
         }
-        
         
         // info뷰
         [infoView].forEach {
