@@ -12,6 +12,7 @@ class SearchViewController: UIViewController {
     
     // MARK: - API 데이터 변수
     var library: Library?
+    var documents: [Document] = []
     
     // MARK: - UI components
     let bookSearchBar = UISearchBar()
@@ -43,14 +44,44 @@ class SearchViewController: UIViewController {
         setConstraints()
         configureUI()
         setCollectionView()
-        //fetchLibraryData(query: "과자")
     }
+    
+    // MARK: - 데이터 함수
+    func fetchLibraryData(query: String, page: Int) {
+        APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
+            self.library = libraryResult
+            DispatchQueue.main.async {
+                self.searchCollectionView.reloadData()
+                print("Library fetched. \(self.library?.documents[0].title)")
+            }
+        }
+    }
+    
+//    func appendNewDocumentData(query: String, page: Int) {
+//        APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
+//            let indexPath = IndexPath(item: self.documents.count - 1, section: 0)
+//            let newDocuments = libraryResult.documents
+//            self.documents.append(contentsOf: newDocuments)
+//            DispatchQueue.main.async {
+//                self.searchCollectionView.insertItems(at: [indexPath])
+//            }
+//        }
+//    }
     
     // MARK: - 기능 설정 함수
     // 검색 기능
     func conductSearch() {
         let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-        fetchLibraryData(query: searchKeyword)
+        APIManager.shared.page = 1
+        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
+//        appendNewDocumentData(query: searchKeyword, page: APIManager.shared.page)
+    }
+    
+    // 무한스크롤 - 다음 페이지 데이터 append
+    func appendNextPageData() {
+        let searchKeyword = bookSearchBar.searchTextField.text ?? ""
+        APIManager.shared.page += 1
+        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
     }
     
     // MARK: - 키보드 관련 함수
@@ -60,6 +91,7 @@ class SearchViewController: UIViewController {
     func setCollectionView() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         searchCollectionView.dataSource = self
+        searchCollectionView.delegate = self
     }
     
     func setConstraints() {
@@ -110,23 +142,15 @@ class SearchViewController: UIViewController {
         }
     }
     
-    // MARK: - 네트워크 함수
-    func fetchLibraryData(query: String) {
-        APIManager.shared.fetchLibraryData(query: query) { libraryResult in
-            self.library = libraryResult
-            DispatchQueue.main.async {
-                self.searchCollectionView.reloadData()
-                print("Library fetched. \(self.library?.documents[0].title)")
-            }
-        }
-    }
+    
     
 }
 
 // MARK: - CollectionView 세팅 함수
-extension SearchViewController: UICollectionViewDataSource {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return library?.documents.count ?? 0
+//        return documents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -140,10 +164,14 @@ extension SearchViewController: UICollectionViewDataSource {
         
         cell.setConstraints()
         cell.configureUI(document: library.documents[indexPath.row])
+//        cell.configureUI(document: documents[indexPath.row])
         
         return cell
     }
     
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        <#code#>
+//    }
     
 }
 

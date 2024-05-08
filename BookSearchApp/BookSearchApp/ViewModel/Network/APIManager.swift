@@ -11,11 +11,14 @@ class APIManager {
     
     static let shared = APIManager()
     
-    func fetchLibraryData(query: String, completion: @escaping (Library) -> ()) {
+    var page: Int = 1
+    
+    func fetchLibraryData(query: String, page: Int, completion: @escaping (Library) -> ()) {
         // url
         var url = URL(string: "https://dapi.kakao.com/v3/search/book")!
         url = URL(string: url.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         url.append(queryItems: [URLQueryItem(name: "query", value: query)])
+        url.append(queryItems: [URLQueryItem(name: "page", value: String(page))])
         
         // httpHeader
         let restAPIKey = "9c4fb90eba075659878d66ef7337ebcb"
@@ -31,14 +34,14 @@ class APIManager {
             print(httpResponse.statusCode)
             
             // 데이터 받기
-            guard let bookData = data else {
+            guard let libraryData = data else {
                 print("error: \(error)")
                 return
             }
-            print("data: \(String(data: bookData, encoding: .utf8))") // 데이터 출력
+            print("data: \(String(data: libraryData, encoding: .utf8))") // 데이터 출력
             
             // 데이터 디코딩
-            guard let libraryResult = try? JSONDecoder().decode(Library.self, from: bookData) 
+            guard let libraryResult = try? JSONDecoder().decode(Library.self, from: libraryData) 
             else {
                 print("디코딩 실패")
                 return
