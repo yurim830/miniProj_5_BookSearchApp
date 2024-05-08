@@ -9,8 +9,15 @@ import UIKit
 import SnapKit
 
 class SearchViewController: UIViewController {
+    
+    // MARK: - API 데이터 변수
+    var library: Library?
+    
+    // MARK: - UI components
     let bookSearchBar = UISearchBar()
+    
     lazy var searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+    
     let collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 10
@@ -28,13 +35,14 @@ class SearchViewController: UIViewController {
         return layout
     }()
     
-    
+    // MARK: - override 함수
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
         setCollectionView()
     }
     
+    // MARK: - custom 함수
     func setCollectionView() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         searchCollectionView.dataSource = self
@@ -63,6 +71,7 @@ class SearchViewController: UIViewController {
     
 }
 
+// MARK: - CollectionView 세팅 함수
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
