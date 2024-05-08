@@ -61,12 +61,22 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configureUI() {
+    func configureUI(document: Document) {
         // 책 사진
         [bookImage].forEach {
-            $0.image = UIImage(systemName: "book")
             $0.contentMode = .scaleToFill
         }
+        Task {
+            do {
+                let imageURL = document.thumbnail
+                let imageData = try await APIManager.shared.fetchUrlData(url: imageURL)
+                print("imageData: \(imageData)")
+                bookImage.image = UIImage(data: imageData)
+            } catch {
+                print("image error: \(error)")
+            }
+        }
+        
         
         // info뷰
         [infoView].forEach {
@@ -77,21 +87,21 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         // 책 제목
         [bookTitleLabel].forEach {
-            $0.text = "책 제목"
+            $0.text = document.title
             $0.font = .systemFont(ofSize: 18, weight: .bold)
             $0.textColor = Colors.labelColor
         }
         
         // 작가
         [bookAuthorLabel].forEach {
-            $0.text = "✏️: 작가"
+            $0.text = "✏️: \(document.authors)"
             $0.font = .systemFont(ofSize: 13, weight: .medium)
             $0.textColor = Colors.labelColor
         }
         
         // 출판사
         [bookPublisherLabel].forEach {
-            $0.text = "📔: 출판사"
+            $0.text = "📔: \(document.publisher)"
             $0.font = .systemFont(ofSize: 13, weight: .medium)
             $0.textColor = Colors.labelColor
         }

@@ -6,23 +6,25 @@
 //
 
 import Foundation
+
 class APIManager {
     
-    func fetchBookData(query: String) -> Library? {
+    static let shared = APIManager()
+    
+    func fetchLibraryData(query: String, completion: @escaping (Result<Library, Error>) -> ()) {
         // url
         var url = URL(string: "https://dapi.kakao.com/v3/search/book")!
         url = URL(string: url.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         url.append(queryItems: [URLQueryItem(name: "query", value: query)])
         
         // httpHeader
-        let restAPIKey = "9c4fb90eba075659878d66ef7337ebcb"
+        let restAPIKey = ""
         let httpHeader = "KakaoAK \(restAPIKey)"
         
         // urlRequest
         var urlRequest = URLRequest(url: url)
         urlRequest.addValue(httpHeader, forHTTPHeaderField: "Authorization")
         
-        var result: Library?
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             // 응답 코드 확인
             let httpResponse = response as! HTTPURLResponse
@@ -41,9 +43,15 @@ class APIManager {
                 print("디코딩 실패")
                 return
             }
-            result = libraryResult
+            print("🟡 result: \(libraryResult)")
+            completion(.success(libraryResult))
         }.resume()
-        
-        return result
     }
+    
+    func fetchUrlData(url: URL) async throws -> Data {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        print("data: \(data)")
+        return data
+    }
+    
 }

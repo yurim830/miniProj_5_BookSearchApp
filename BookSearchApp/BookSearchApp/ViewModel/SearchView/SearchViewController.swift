@@ -40,6 +40,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         setConstraints()
         setCollectionView()
+        fetchLibraryData(query: "과자")
     }
     
     // MARK: - custom 함수
@@ -69,21 +70,41 @@ class SearchViewController: UIViewController {
         }
     }
     
+    func fetchLibraryData(query: String) {
+        APIManager.shared.fetchLibraryData(query: query) { result in
+            switch result {
+            case .success(let libraryResult):
+                self.library = libraryResult
+                DispatchQueue.main.async {
+                    self.searchCollectionView.reloadData()
+                    print("Library fetched. \(self.library?.documents[0].title)")
+                }
+                
+            case .failure(let error):
+                print("error: \(error)")
+            }
+        }
+    }
 }
 
 // MARK: - CollectionView 세팅 함수
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return library?.documents.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: SearchCollectionViewCell.identifier,
-            for: indexPath) as? SearchCollectionViewCell 
-        else { return UICollectionViewCell() }
+            for: indexPath) as? SearchCollectionViewCell,
+              let library = self.library
+        else {
+            return UICollectionViewCell()
+        }
+        
         cell.setConstraints()
-        cell.configureUI()
+        cell.configureUI(document: library.documents[indexPath.row])
+        
         return cell
     }
     

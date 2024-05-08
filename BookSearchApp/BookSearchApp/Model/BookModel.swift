@@ -21,7 +21,7 @@ struct Document: Decodable {
     let publisher: String
     let salePrice: Int
     let status: String
-    let thumbnail: String
+    let thumbnail: URL
     let title: String
     let translators: [String]
     let url: String
