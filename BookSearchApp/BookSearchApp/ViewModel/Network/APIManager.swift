@@ -11,14 +11,14 @@ class APIManager {
     
     static let shared = APIManager()
     
-    func fetchLibraryData(query: String, completion: @escaping (Result<Library, Error>) -> ()) {
+    func fetchLibraryData(query: String, completion: @escaping (Library) -> ()) {
         // url
         var url = URL(string: "https://dapi.kakao.com/v3/search/book")!
         url = URL(string: url.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         url.append(queryItems: [URLQueryItem(name: "query", value: query)])
         
         // httpHeader
-        let restAPIKey = ""
+        let restAPIKey = "9c4fb90eba075659878d66ef7337ebcb"
         let httpHeader = "KakaoAK \(restAPIKey)"
         
         // urlRequest
@@ -44,7 +44,7 @@ class APIManager {
                 return
             }
             print("🟡 result: \(libraryResult)")
-            completion(.success(libraryResult))
+            completion(libraryResult)
         }.resume()
     }
     

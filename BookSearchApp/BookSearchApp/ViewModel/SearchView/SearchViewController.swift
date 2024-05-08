@@ -71,17 +71,11 @@ class SearchViewController: UIViewController {
     }
     
     func fetchLibraryData(query: String) {
-        APIManager.shared.fetchLibraryData(query: query) { result in
-            switch result {
-            case .success(let libraryResult):
-                self.library = libraryResult
-                DispatchQueue.main.async {
-                    self.searchCollectionView.reloadData()
-                    print("Library fetched. \(self.library?.documents[0].title)")
-                }
-                
-            case .failure(let error):
-                print("error: \(error)")
+        APIManager.shared.fetchLibraryData(query: query) { libraryResult in
+            self.library = libraryResult
+            DispatchQueue.main.async {
+                self.searchCollectionView.reloadData()
+                print("Library fetched. \(self.library?.documents[0].title)")
             }
         }
     }
