@@ -94,8 +94,8 @@
 			children = (
 				1ADF02DE2BEAA0EF00311F97 /* Network */,
 				1ADF02D82BEA52FA00311F97 /* SearchView */,
-				1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */,
-				1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */,
+				1ADF02E42BEB3F6700311F97 /* WishListView */,
+				1ADF02E32BEB3F4300311F97 /* TabBar */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -122,6 +122,22 @@
 				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		1ADF02E32BEB3F4300311F97 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		1ADF02E42BEB3F6700311F97 /* WishListView */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */,
+			);
+			path = WishListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
