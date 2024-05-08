@@ -34,9 +34,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         // info뷰 레이아웃
         infoView.snp.makeConstraints {
-            $0.height.equalTo(77)
             $0.bottom.horizontalEdges.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(10) // 잘 안 잡히고 있음
         }
         
         // info뷰에 뷰 넣기
@@ -48,8 +46,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
         
         bookTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(8)
         }
+        
         
         bookAuthorLabel.snp.makeConstraints {
             $0.top.equalTo(bookTitleLabel.snp.bottom).offset(1)
@@ -57,6 +56,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         bookPublisherLabel.snp.makeConstraints {
             $0.top.equalTo(bookAuthorLabel.snp.bottom).offset(1)
+            $0.bottom.equalToSuperview().inset(5)
         }
         
     }
@@ -81,20 +81,24 @@ class SearchCollectionViewCell: UICollectionViewCell {
         // info뷰
         [infoView].forEach {
             $0.backgroundColor = Colors.backgroundColor?.withAlphaComponent(0.8)
-            $0.layer.cornerRadius = 10
 //            $0.alpha = 0.8 // 이렇게 투명도 적용하면 하위 컴포넌트 전체에 투명도 적용됨.
         }
         
         // 책 제목
         [bookTitleLabel].forEach {
             $0.text = document.title
-            $0.font = .systemFont(ofSize: 18, weight: .bold)
+            $0.font = .systemFont(ofSize: 16, weight: .bold)
+            $0.numberOfLines = 0
+            $0.lineBreakMode = .byCharWrapping
             $0.textColor = Colors.labelColor
         }
         
         // 작가
         [bookAuthorLabel].forEach {
-            $0.text = "✏️: \(document.authors)"
+            let authors = document.authors
+            let authorsCount = authors.count
+            let author = authorsCount == 1 ? "\(authors[0])" : "\(authors[0]) 외"
+            $0.text = "✏️: \(author)"
             $0.font = .systemFont(ofSize: 13, weight: .medium)
             $0.textColor = Colors.labelColor
         }
