@@ -16,6 +16,8 @@ class SearchViewController: UIViewController {
     // MARK: - UI components
     let bookSearchBar = UISearchBar()
     
+    let searchButton = UIButton()
+    
     lazy var searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
     
     let collectionViewLayout: UICollectionViewFlowLayout = {
@@ -39,6 +41,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
+        configureUI()
         setCollectionView()
         fetchLibraryData(query: "과자")
     }
@@ -55,7 +58,19 @@ class SearchViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalTo(view.safeAreaLayoutGuide)
-                $0.horizontalEdges.equalToSuperview().inset(10)
+                $0.leading.equalToSuperview().inset(10)
+            }
+        }
+        
+        [searchButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.snp.makeConstraints {
+                $0.width.equalTo(50)
+                $0.height.centerY.equalTo(bookSearchBar)
+                $0.leading.equalTo(bookSearchBar.snp.trailing)
+                $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+                
             }
         }
         
@@ -64,11 +79,21 @@ class SearchViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalTo(bookSearchBar.snp.bottom).offset(10)
-                $0.horizontalEdges.equalTo(bookSearchBar)
+                $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
                 $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
             }
         }
     }
+    
+    func configureUI() {
+        [searchButton].forEach {
+            $0.setTitle("검색", for: .normal)
+            $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+            $0.setTitleColor(Colors.blueColor, for: .normal)
+            $0.backgroundColor = Colors.yellowColor
+        }
+    }
+    
     
     func fetchLibraryData(query: String) {
         APIManager.shared.fetchLibraryData(query: query) { libraryResult in
