@@ -80,7 +80,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         // info뷰
         [infoView].forEach {
-            $0.backgroundColor = Colors.backgroundColor?.withAlphaComponent(0.8)
+            $0.backgroundColor = Colors.backgroundColor?.withAlphaComponent(0.7)
 //            $0.alpha = 0.8 // 이렇게 투명도 적용하면 하위 컴포넌트 전체에 투명도 적용됨.
         }
         
@@ -96,11 +96,12 @@ class SearchCollectionViewCell: UICollectionViewCell {
         // 작가
         [bookAuthorLabel].forEach {
             let authors = document.authors
-            let authorsCount = authors.count
-            let author = authorsCount == 1 ? "\(authors[0])" : "\(authors[0]) 외"
-            $0.text = "✏️: \(author)"
-            $0.font = .systemFont(ofSize: 13, weight: .medium)
-            $0.textColor = Colors.labelColor
+            if authors.count >= 1 {
+                let authorText = authors.count == 1 ? "\(authors[0])" : "\(authors[0]) 외"
+                $0.text = "✏️: \(authorText)"
+                $0.font = .systemFont(ofSize: 13, weight: .medium)
+                $0.textColor = Colors.labelColor
+            }
         }
         
         // 출판사

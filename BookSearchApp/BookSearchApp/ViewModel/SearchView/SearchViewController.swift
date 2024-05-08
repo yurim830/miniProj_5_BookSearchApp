@@ -43,10 +43,16 @@ class SearchViewController: UIViewController {
         setConstraints()
         configureUI()
         setCollectionView()
-        fetchLibraryData(query: "과자")
+        //fetchLibraryData(query: "과자")
     }
     
     // MARK: - custom 함수
+    
+    func conductSearch() {
+        let searchKeyword = bookSearchBar.searchTextField.text ?? ""
+        fetchLibraryData(query: searchKeyword)
+    }
+    
     func setCollectionView() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         searchCollectionView.dataSource = self
@@ -70,8 +76,14 @@ class SearchViewController: UIViewController {
                 $0.height.centerY.equalTo(bookSearchBar)
                 $0.leading.equalTo(bookSearchBar.snp.trailing)
                 $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
-                
             }
+            // add Action
+            $0.addAction(
+                UIAction { _ in
+                    self.conductSearch()
+                }
+                , for: .touchUpInside
+            )
         }
         
         [searchCollectionView].forEach {
@@ -104,6 +116,7 @@ class SearchViewController: UIViewController {
             }
         }
     }
+    
 }
 
 // MARK: - CollectionView 세팅 함수
