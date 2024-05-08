@@ -77,12 +77,12 @@ class SearchViewController: UIViewController {
 //        appendNewDocumentData(query: searchKeyword, page: APIManager.shared.page)
     }
     
-    // 무한스크롤 - 다음 페이지 데이터 append
-    func appendNextPageData() {
-        let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-        APIManager.shared.page += 1
-        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-    }
+//    // 무한스크롤 - 다음 페이지 데이터 append
+//    func appendNextPageData() {
+//        let searchKeyword = bookSearchBar.searchTextField.text ?? ""
+//        APIManager.shared.page += 1
+//        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
+//    }
     
     // MARK: - 키보드 관련 함수
     
