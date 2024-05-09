@@ -73,7 +73,6 @@
 				1ADF02DB2BEAA0AC00311F97 /* ViewModel */,
 				1ADF02B72BEA074B00311F97 /* AppDelegate.swift */,
 				1ADF02B92BEA074B00311F97 /* SceneDelegate.swift */,
-				1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */,
 				1ADF02C02BEA074E00311F97 /* Assets.xcassets */,
 				1ADF02C52BEA074E00311F97 /* Info.plist */,
 			);
@@ -94,6 +93,7 @@
 			children = (
 				1ADF02DE2BEAA0EF00311F97 /* Network */,
 				1ADF02D82BEA52FA00311F97 /* SearchView */,
+				1ADF02E52BEC5C2B00311F97 /* DetailView */,
 				1ADF02E42BEB3F6700311F97 /* WishListView */,
 				1ADF02E32BEB3F4300311F97 /* TabBar */,
 			);
@@ -138,6 +138,14 @@
 				1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */,
 			);
 			path = WishListView;
+			sourceTree = "<group>";
+		};
+		1ADF02E52BEC5C2B00311F97 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
