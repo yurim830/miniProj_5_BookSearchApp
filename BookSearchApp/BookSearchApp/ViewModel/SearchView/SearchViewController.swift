@@ -182,11 +182,11 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
 }
 
-//extension SearchViewController: UISearchBarDelegate {
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        conductSearch()
-//        searchBar.resignFirstResponder()
-//    }
-//    
-//}
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        conductSearch()
+        searchBar.resignFirstResponder()
+    }
+    
+}
 
