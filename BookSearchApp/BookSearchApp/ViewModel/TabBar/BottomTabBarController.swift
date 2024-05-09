@@ -11,15 +11,17 @@ class BottomTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
         setupViewControllers()
-        UITabBar.appearance().tintColor = .green
+        view.backgroundColor = Colors.backgroundColor
+        let UITabbarAppearance = UITabBar.appearance()
+        UITabbarAppearance.tintColor = Colors.blueColor
+        UITabbarAppearance.unselectedItemTintColor = Colors.lightGrayColor
     }
     
     private func setupViewControllers() {
         // 첫 번째 탭 - SearchViewController
         let searchVC = SearchViewController()
-        let searchTabBarItem = UITabBarItem(title: "책 검색하기", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglass"))
+        let searchTabBarItem = UITabBarItem(title: "책 검색하기", image: UIImage(systemName: "magnifyingglass.circle"), selectedImage: UIImage(systemName: "magnifyingglass.circle.fill"))
         searchVC.tabBarItem = searchTabBarItem
         
         // 두 번째 탭
