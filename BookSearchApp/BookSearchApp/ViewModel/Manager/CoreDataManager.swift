@@ -69,4 +69,16 @@ class CoreDataManager {
         try? context.save()
     }
     
+    // MARK: - 데이터 확인 후 인덱스 반환
+    // 특정 데이터가 CoreData에 있는지 확인하고, 해당 데이터의 index 번호를 반환한다. 없으면 nil 반환.
+    func returnIndexIfHasTarget(_ targetIsbn: String) -> Int? {
+        let savedBooks = readData() // coreData에 저장된 [Book]
+        
+        for (index, book) in savedBooks.enumerated() {
+            if book.isbn == targetIsbn {
+                return index
+            }
+        }
+        return nil
+    }
 }
