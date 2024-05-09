@@ -33,6 +33,7 @@ class CoreDataManager {
         }
         
         // 값 입력
+        newBook.isbn = document.isbn
         newBook.title = document.title
         newBook.authors = authorsText
         newBook.price = Int16(document.price)
