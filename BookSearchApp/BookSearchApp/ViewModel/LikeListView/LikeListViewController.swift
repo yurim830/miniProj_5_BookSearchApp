@@ -27,12 +27,16 @@ class LikeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setConstraints()
         configureUI()
         setTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        myBookList = CoreDataManager.shared.readData()
+        tableView.reloadData()
+    }
   
     
     
@@ -106,9 +110,11 @@ class LikeListViewController: UIViewController {
     
     // MARK: - TableView 셋팅
     func setTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(LikeListTableViewCell.self, forCellReuseIdentifier: LikeListTableViewCell.identifier)
+        [tableView].forEach {
+            $0.dataSource = self
+            $0.delegate = self
+            $0.register(LikeListTableViewCell.self, forCellReuseIdentifier: LikeListTableViewCell.identifier)
+        }
     }
     
 }
@@ -134,5 +140,16 @@ extension LikeListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // 1. coreData에서 삭제
+        CoreDataManager.shared.deleteData(indexPath.row)
+        
+        // 2. myBookList 배열에서 삭제
+        myBookList.remove(at: indexPath.row)
+        
+        // 3. 뷰 업데이트
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
