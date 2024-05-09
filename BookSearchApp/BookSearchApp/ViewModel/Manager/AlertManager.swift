@@ -16,7 +16,14 @@ class AlertManager {
         vc.present(alert, animated: true)
     }
     
-    
+    class func dismissModalAlert(title: String?, message: String?, vc: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .cancel) { [weak vc] _ in
+            vc?.dismiss(animated: true)
+        }
+        alert.addAction(ok)
+        vc.present(alert, animated: true)
+    }
     
     class func deleteEveryDataAlert(vc: LikeListViewController) {
         

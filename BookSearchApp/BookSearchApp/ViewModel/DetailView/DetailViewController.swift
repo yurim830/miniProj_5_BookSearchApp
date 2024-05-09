@@ -25,11 +25,7 @@ class DetailViewController: UIViewController {
     let addButtonImage = UIImageView()
     
     let document: Document
-    var isAdded: Bool {
-        didSet {
-            
-        }
-    }
+    var isAdded: Bool
     
     // MARK: - override
     override func viewDidLoad() {
@@ -299,7 +295,7 @@ class DetailViewController: UIViewController {
         
     }
     
-    // MARK: - 버튼 액션 추가
+    // MARK: - 버튼 액션 설정
     // addButton뷰에 tapGesture action 등록
     func setAddButtonViewAction() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAddButton(_:))) // UIImageView 클릭 제스쳐
@@ -311,23 +307,31 @@ class DetailViewController: UIViewController {
     @objc func tappedAddButton(_ gesture: UITapGestureRecognizer) {
         print("👆Button tapped!")
         // 1. 현재 데이터가 CoreData에 있는지 확인
-        guard let index = CoreDataManager.shared
-            .returnIndexIfHasTarget(self.document.isbn) else {
+        if let index = CoreDataManager.shared
+            .returnIndexIfHasTarget(self.document.isbn) {
             
-        // 2-1. CoreData에 없을 경우 -> 저장
+            // 2-1. CoreData에 있는 경우 -> 삭제
+            print("삭제할거다!")
+            CoreDataManager.shared.deleteData(index)
+            
+            // 3-1. 삭제 Alert 띄우기
+            AlertManager.dismissModalAlert(title: "찜 해제", message: "📒\"\(document.title)\"을/를 찜 리스트에서 삭제했습니다.", vc: self)
+            
+        } else {
+            // 2-2. CoreData에 없을 경우 -> 저장
             print("저장할거다!")
             CoreDataManager.shared.saveData(self.document)
-            return
+            
+            // 3-2. 저장 Alert 띄우기
+            AlertManager.dismissModalAlert(title: "담기 완료", message: "📒\"\(document.title)\"을/를 찜 리스트에 담았습니다.", vc: self)
         }
-        // 2-2. CoreData에 있는 경우 -> 삭제
-        print("삭제할거다!")
-        CoreDataManager.shared.deleteData(index)
-        
         // 3. isAdded 값 변경
         self.isAdded = !self.isAdded
         
         // 4. 버튼 하트 이미지 변경
         setAddButtonImageUI(added: isAdded)
+        
+        
     }
     
     
