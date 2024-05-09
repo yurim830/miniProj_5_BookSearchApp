@@ -9,20 +9,23 @@ import UIKit
 
 class LikeListTableViewCell: UITableViewCell {
     
+    static let identifier = String(describing: LikeListTableViewCell.self)
+    
     let titleLabel = UILabel()
     let authorLabel = UILabel()
     let priceLabel = UILabel()
     
     func setConstraints() {
-        // (10)[title](20)[author](20)[price](10)
+        // (20)(10)[title](20)[author](20)[price](10)(20)
         // title:author:price = 6:2:2
         let paddingX = 10
         let interval = 20
-        let width = contentView.bounds.width
+        let phoneWidth = UIScreen.main.bounds.width
+        let width = phoneWidth - 40
         let labelsWidth = width - 60
-        let titleWidth = labelsWidth * 0.6
+        let titleWidth = labelsWidth * 0.55
         let authorWidth = labelsWidth * 0.2
-        let priceWidth = labelsWidth * 0.2
+        let priceWidth = labelsWidth * 0.25
         
         [titleLabel].forEach {
             contentView.addSubview($0)
@@ -58,28 +61,29 @@ class LikeListTableViewCell: UITableViewCell {
     func configureUI(_ book: Book) {
         [titleLabel].forEach {
             $0.text = book.title
-            $0.font = .systemFont(ofSize: 18, weight: .semibold)
+            $0.font = .systemFont(ofSize: 15, weight: .semibold)
             $0.textColor = Colors.labelColor
-            $0.textAlignment = .left
-            $0.lineBreakMode = .byCharWrapping
-            $0.numberOfLines = 0
+            $0.textAlignment = .center
+            $0.lineBreakMode = .byTruncatingTail
+            $0.numberOfLines = 2
         }
         
         [authorLabel].forEach {
             $0.text = book.authors
-            $0.font = .systemFont(ofSize: 18, weight: .regular)
+            $0.font = .systemFont(ofSize: 14, weight: .regular)
             $0.textColor = Colors.lightGrayColor
             $0.textAlignment = .center
-            $0.lineBreakMode = .byCharWrapping
-            $0.numberOfLines = 0
+            $0.lineBreakMode = .byTruncatingTail
+            $0.numberOfLines = 2
         }
         
         [priceLabel].forEach {
-            $0.text = "\(book.price) 원"
-            $0.font = .systemFont(ofSize: 18, weight: .regular)
+            guard let price = NumberFormattingManager.shared.intIntoDecimalString(Int(book.price)) else { return }
+            $0.text = "\(price) 원"
+            $0.font = .systemFont(ofSize: 14, weight: .regular)
             $0.textColor = Colors.labelColor
             $0.textAlignment = .center
-            $0.lineBreakMode = .byCharWrapping
+            $0.lineBreakMode = .byTruncatingTail
             $0.numberOfLines = 0
         }
     }

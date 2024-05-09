@@ -21,6 +21,8 @@
 		1ADF03242BED051C00311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03232BED051C00311F97 /* SnapKit */; };
 		1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */; };
 		1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03292BED065D00311F97 /* CoreDataManager.swift */; };
+		1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */; };
+		1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		1ADF02E12BEB205B00311F97 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
 		1ADF03262BED05BD00311F97 /* BookCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		1ADF03292BED065D00311F97 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTableViewCell.swift; sourceTree = "<group>"; };
+		1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormattingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +102,7 @@
 				1ADF03282BED065100311F97 /* Manager */,
 				1ADF02D82BEA52FA00311F97 /* SearchView */,
 				1ADF02E52BEC5C2B00311F97 /* DetailView */,
-				1ADF02E42BEB3F6700311F97 /* WishListView */,
+				1ADF02E42BEB3F6700311F97 /* LikeListView */,
 				1ADF02E32BEB3F4300311F97 /* TabBar */,
 			);
 			path = ViewModel;
@@ -129,12 +133,13 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		1ADF02E42BEB3F6700311F97 /* WishListView */ = {
+		1ADF02E42BEB3F6700311F97 /* LikeListView */ = {
 			isa = PBXGroup;
 			children = (
 				1ADF02CD2BEA07A400311F97 /* LikeListViewController.swift */,
+				1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */,
 			);
-			path = WishListView;
+			path = LikeListView;
 			sourceTree = "<group>";
 		};
 		1ADF02E52BEC5C2B00311F97 /* DetailView */ = {
@@ -150,6 +155,7 @@
 			children = (
 				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
 				1ADF03292BED065D00311F97 /* CoreDataManager.swift */,
+				1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -234,9 +240,11 @@
 				1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */,
 				1ADF02D02BEA07B700311F97 /* BottomTabBarController.swift in Sources */,
 				1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */,
+				1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */,
 				1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */,
 				1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */,
 				1ADF02CE2BEA07A400311F97 /* LikeListViewController.swift in Sources */,
+				1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */,
 				1ADF02D22BEA3D5700311F97 /* DetailViewController.swift in Sources */,
 				1ADF02B82BEA074B00311F97 /* AppDelegate.swift in Sources */,
 				1ADF02D72BEA52F100311F97 /* SearchCollectionViewCell.swift in Sources */,

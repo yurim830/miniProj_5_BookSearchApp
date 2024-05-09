@@ -233,7 +233,8 @@ class DetailViewController: UIViewController {
         }
         
         [priceLabel].forEach {
-            $0.text = "\(document.price) 원"
+            guard let price = NumberFormattingManager.shared.intIntoDecimalString(document.price) else { return }
+            $0.text = "\(price) 원"
             $0.numberOfLines = 0
             $0.textColor = Colors.labelColor
             $0.font = .systemFont(ofSize: 22, weight: .semibold)
