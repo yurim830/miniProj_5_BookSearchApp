@@ -248,7 +248,7 @@ class DetailViewController: UIViewController {
         // addButton
         addButton.addAction(
             UIAction { _ in
-                
+                CoreDataManager.shared.saveData(self.document)
             }
             , for: .touchUpInside
         )

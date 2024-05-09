@@ -19,6 +19,8 @@
 		1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */; };
 		1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02E12BEB205B00311F97 /* BookModel.swift */; };
 		1ADF03242BED051C00311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03232BED051C00311F97 /* SnapKit */; };
+		1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */; };
+		1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03292BED065D00311F97 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		1ADF02D92BEA8F1B00311F97 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		1ADF02E12BEB205B00311F97 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
+		1ADF03262BED05BD00311F97 /* BookCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		1ADF03292BED065D00311F97 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +95,7 @@
 		1ADF02DB2BEAA0AC00311F97 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1ADF02DE2BEAA0EF00311F97 /* Network */,
+				1ADF03282BED065100311F97 /* Manager */,
 				1ADF02D82BEA52FA00311F97 /* SearchView */,
 				1ADF02E52BEC5C2B00311F97 /* DetailView */,
 				1ADF02E42BEB3F6700311F97 /* WishListView */,
@@ -105,6 +109,7 @@
 			children = (
 				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
 				1ADF02E12BEB205B00311F97 /* BookModel.swift */,
+				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -114,14 +119,6 @@
 			children = (
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		1ADF02DE2BEAA0EF00311F97 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		1ADF02E32BEB3F4300311F97 /* TabBar */ = {
@@ -146,6 +143,15 @@
 				1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */,
 			);
 			path = DetailView;
+			sourceTree = "<group>";
+		};
+		1ADF03282BED065100311F97 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
+				1ADF03292BED065D00311F97 /* CoreDataManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +234,8 @@
 				1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */,
 				1ADF02D02BEA07B700311F97 /* BottomTabBarController.swift in Sources */,
 				1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */,
+				1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */,
+				1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */,
 				1ADF02CE2BEA07A400311F97 /* WishListViewController.swift in Sources */,
 				1ADF02D22BEA3D5700311F97 /* DetailViewController.swift in Sources */,
 				1ADF02B82BEA074B00311F97 /* AppDelegate.swift in Sources */,
@@ -451,6 +459,20 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1ADF03262BED05BD00311F97 /* BookCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 1ADF03262BED05BD00311F97 /* BookCoreDataModel.xcdatamodel */;
+			name = BookCoreDataModel.xcdatamodeld;
+			path = "/Users/yurim/Desktop/과제/[240507] 개인과제(5) 책 검색 앱/miniProj_5_BookSearchApp/BookSearchApp/BookSearchApp/Model/BookCoreDataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1ADF02AC2BEA074B00311F97 /* Project object */;
 }
