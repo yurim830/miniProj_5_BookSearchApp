@@ -73,8 +73,6 @@ class LikeListViewController: UIViewController {
             }
         }
         
-        print("safeAreaInsets: \(view.safeAreaInsets)")
-        print("safeAreaWidth: \(view.safeAreaLayoutGuide.layoutFrame.width)")
         [tableView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
