@@ -25,8 +25,8 @@ class BottomTabBarController: UITabBarController {
         searchVC.tabBarItem = searchTabBarItem
         
         // 두 번째 탭
-        let wishListVC = WishListViewController()
-        let wishListTabBarItem = UITabBarItem(title: "위시리스트", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
+        let wishListVC = LikeListViewController()
+        let wishListTabBarItem = UITabBarItem(title: "찜 리스트", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
         wishListVC.tabBarItem = wishListTabBarItem
         
         // 뷰 컨트롤러 배열 생성
