@@ -44,7 +44,7 @@ class CoreDataManager {
     
     
     // MARK: - 데이터 읽기(Read)
-    func setProductList() -> [Book] {
+    func readData() -> [Book] {
         guard let context = self.persistentContainer?.viewContext else { return [] }
         
         let request = Book.fetchRequest()    // fetchRequest: Entity에 대해 코어데이터에서 특정 조건에 맞는 데이터 요청
@@ -56,7 +56,7 @@ class CoreDataManager {
     
     
     // MARK: - 데이터 삭제(Delete)
-    func deleteProduct(_ index: Int) {
+    func deleteData(_ index: Int) {
         guard let context = self.persistentContainer?.viewContext else { return }
         
         let request = Book.fetchRequest()
