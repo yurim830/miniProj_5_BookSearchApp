@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
     
     let collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 10
+        let spacing: CGFloat = 5
         let deviceWidth = UIScreen.main.bounds.width
         let countForLine: CGFloat = 2 // 한 줄에 넣고 싶은 아이템 개수
         let itemWidth = (deviceWidth - 20 - (spacing * (countForLine - 1)) - 1) / countForLine
@@ -33,7 +33,7 @@ class SearchViewController: UIViewController {
         layout.scrollDirection = .vertical // default: vertical
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
-        layout.itemSize = .init(width: itemWidth, height: itemWidth * 1.2)
+        layout.itemSize = .init(width: itemWidth, height: itemWidth * 1.3)
         layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         return layout
     }()
@@ -137,6 +137,8 @@ class SearchViewController: UIViewController {
     }
     
     func configureUI() {
+        searchCollectionView.backgroundColor = Colors.backgroundColor
+        
         [searchButton].forEach {
             $0.setTitle("검색", for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
