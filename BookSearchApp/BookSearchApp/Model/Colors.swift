@@ -14,4 +14,5 @@ class Colors {
     static let redColor = UIColor(named: "redColor")
     static let yellowColor = UIColor(named: "yellowColor")
     static let blueColor = UIColor(named: "blueColor")
+    static let greenColor = UIColor(named: "greenColor")
 }

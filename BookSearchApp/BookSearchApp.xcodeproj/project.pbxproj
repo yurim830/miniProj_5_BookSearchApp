@@ -11,14 +11,19 @@
 		1ADF02BA2BEA074B00311F97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02B92BEA074B00311F97 /* SceneDelegate.swift */; };
 		1ADF02C12BEA074E00311F97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ADF02C02BEA074E00311F97 /* Assets.xcassets */; };
 		1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02CB2BEA079900311F97 /* SearchViewController.swift */; };
-		1ADF02CE2BEA07A400311F97 /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */; };
+		1ADF02CE2BEA07A400311F97 /* LikeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02CD2BEA07A400311F97 /* LikeListViewController.swift */; };
 		1ADF02D02BEA07B700311F97 /* BottomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */; };
 		1ADF02D22BEA3D5700311F97 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */; };
-		1ADF02D52BEA40BF00311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF02D42BEA40BF00311F97 /* SnapKit */; };
 		1ADF02D72BEA52F100311F97 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02D62BEA52F100311F97 /* SearchCollectionViewCell.swift */; };
 		1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02D92BEA8F1B00311F97 /* Colors.swift */; };
 		1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */; };
 		1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02E12BEB205B00311F97 /* BookModel.swift */; };
+		1ADF03242BED051C00311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03232BED051C00311F97 /* SnapKit */; };
+		1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */; };
+		1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03292BED065D00311F97 /* CoreDataManager.swift */; };
+		1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */; };
+		1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */; };
+		1ADF03302BED773900311F97 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032F2BED773800311F97 /* AlertManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,13 +33,18 @@
 		1ADF02C02BEA074E00311F97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ADF02C52BEA074E00311F97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ADF02CB2BEA079900311F97 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
+		1ADF02CD2BEA07A400311F97 /* LikeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewController.swift; sourceTree = "<group>"; };
 		1ADF02CF2BEA07B700311F97 /* BottomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarController.swift; sourceTree = "<group>"; };
 		1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1ADF02D62BEA52F100311F97 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		1ADF02D92BEA8F1B00311F97 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		1ADF02E12BEB205B00311F97 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
+		1ADF03262BED05BD00311F97 /* BookCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		1ADF03292BED065D00311F97 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTableViewCell.swift; sourceTree = "<group>"; };
+		1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormattingManager.swift; sourceTree = "<group>"; };
+		1ADF032F2BED773800311F97 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ADF02D52BEA40BF00311F97 /* SnapKit in Frameworks */,
+				1ADF03242BED051C00311F97 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,7 +83,6 @@
 				1ADF02DB2BEAA0AC00311F97 /* ViewModel */,
 				1ADF02B72BEA074B00311F97 /* AppDelegate.swift */,
 				1ADF02B92BEA074B00311F97 /* SceneDelegate.swift */,
-				1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */,
 				1ADF02C02BEA074E00311F97 /* Assets.xcassets */,
 				1ADF02C52BEA074E00311F97 /* Info.plist */,
 			);
@@ -92,9 +101,10 @@
 		1ADF02DB2BEAA0AC00311F97 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1ADF02DE2BEAA0EF00311F97 /* Network */,
+				1ADF03282BED065100311F97 /* Manager */,
 				1ADF02D82BEA52FA00311F97 /* SearchView */,
-				1ADF02E42BEB3F6700311F97 /* WishListView */,
+				1ADF02E52BEC5C2B00311F97 /* DetailView */,
+				1ADF02E42BEB3F6700311F97 /* LikeListView */,
 				1ADF02E32BEB3F4300311F97 /* TabBar */,
 			);
 			path = ViewModel;
@@ -105,6 +115,7 @@
 			children = (
 				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
 				1ADF02E12BEB205B00311F97 /* BookModel.swift */,
+				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,14 +127,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1ADF02DE2BEAA0EF00311F97 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		1ADF02E32BEB3F4300311F97 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,12 +135,32 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		1ADF02E42BEB3F6700311F97 /* WishListView */ = {
+		1ADF02E42BEB3F6700311F97 /* LikeListView */ = {
 			isa = PBXGroup;
 			children = (
-				1ADF02CD2BEA07A400311F97 /* WishListViewController.swift */,
+				1ADF02CD2BEA07A400311F97 /* LikeListViewController.swift */,
+				1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */,
 			);
-			path = WishListView;
+			path = LikeListView;
+			sourceTree = "<group>";
+		};
+		1ADF02E52BEC5C2B00311F97 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02D12BEA3D5700311F97 /* DetailViewController.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		1ADF03282BED065100311F97 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
+				1ADF03292BED065D00311F97 /* CoreDataManager.swift */,
+				1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */,
+				1ADF032F2BED773800311F97 /* AlertManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,7 +180,7 @@
 			);
 			name = BookSearchApp;
 			packageProductDependencies = (
-				1ADF02D42BEA40BF00311F97 /* SnapKit */,
+				1ADF03232BED051C00311F97 /* SnapKit */,
 			);
 			productName = BookSearchApp;
 			productReference = 1ADF02B42BEA074B00311F97 /* BookSearchApp.app */;
@@ -188,7 +211,7 @@
 			);
 			mainGroup = 1ADF02AB2BEA074B00311F97;
 			packageReferences = (
-				1ADF02D32BEA40BF00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1ADF03222BED051C00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 1ADF02B52BEA074B00311F97 /* Products */;
 			projectDirPath = "";
@@ -217,10 +240,15 @@
 			files = (
 				1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */,
 				1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */,
+				1ADF03302BED773900311F97 /* AlertManager.swift in Sources */,
 				1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */,
 				1ADF02D02BEA07B700311F97 /* BottomTabBarController.swift in Sources */,
 				1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */,
-				1ADF02CE2BEA07A400311F97 /* WishListViewController.swift in Sources */,
+				1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */,
+				1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */,
+				1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */,
+				1ADF02CE2BEA07A400311F97 /* LikeListViewController.swift in Sources */,
+				1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */,
 				1ADF02D22BEA3D5700311F97 /* DetailViewController.swift in Sources */,
 				1ADF02B82BEA074B00311F97 /* AppDelegate.swift in Sources */,
 				1ADF02D72BEA52F100311F97 /* SearchCollectionViewCell.swift in Sources */,
@@ -426,7 +454,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1ADF02D32BEA40BF00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		1ADF03222BED051C00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -437,12 +465,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1ADF02D42BEA40BF00311F97 /* SnapKit */ = {
+		1ADF03232BED051C00311F97 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1ADF02D32BEA40BF00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 1ADF03222BED051C00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1ADF03262BED05BD00311F97 /* BookCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 1ADF03262BED05BD00311F97 /* BookCoreDataModel.xcdatamodel */;
+			name = BookCoreDataModel.xcdatamodeld;
+			path = "/Users/yurim/Desktop/과제/[240507] 개인과제(5) 책 검색 앱/miniProj_5_BookSearchApp/BookSearchApp/BookSearchApp/Model/BookCoreDataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1ADF02AC2BEA074B00311F97 /* Project object */;
 }

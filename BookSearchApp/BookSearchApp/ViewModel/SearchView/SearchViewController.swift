@@ -26,14 +26,14 @@ class SearchViewController: UIViewController {
         let spacing: CGFloat = 10
         let deviceWidth = UIScreen.main.bounds.width
         let countForLine: CGFloat = 2 // 한 줄에 넣고 싶은 아이템 개수
-        let itemWidth = (deviceWidth - 20 - (spacing * (countForLine - 1)) - 1) / countForLine
-        // 한 줄에 2개; (10)[사진](10)[사진](10)
+        let itemWidth = (deviceWidth - 30 - (spacing * (countForLine - 1)) - 1) / countForLine
+        // 한 줄에 2개; (20)[사진 ](10)[사진 ](10)
         // 1을 빼는 이유: 부동소수점 때문에 itemWidth가 실제보다 크게 나올 수 있기 때문
         
         layout.scrollDirection = .vertical // default: vertical
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
-        layout.itemSize = .init(width: itemWidth, height: itemWidth * 1.2)
+        layout.itemSize = .init(width: itemWidth, height: itemWidth * 1.3)
         layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         return layout
     }()
@@ -44,6 +44,7 @@ class SearchViewController: UIViewController {
         setConstraints()
         configureUI()
         setCollectionView()
+        bookSearchBar.delegate = self
     }
     
     // MARK: - 데이터 함수
@@ -52,7 +53,6 @@ class SearchViewController: UIViewController {
             self.library = libraryResult
             DispatchQueue.main.async {
                 self.searchCollectionView.reloadData()
-                print("Library fetched. \(self.library?.documents[0].title)")
             }
         }
     }
@@ -92,6 +92,7 @@ class SearchViewController: UIViewController {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
+        
     }
     
     func setConstraints() {
@@ -116,7 +117,8 @@ class SearchViewController: UIViewController {
             // add Action
             $0.addAction(
                 UIAction { _ in
-                    self.conductSearch()
+//                    self.conductSearch()
+                    self.searchBarSearchButtonClicked(self.bookSearchBar)
                 }
                 , for: .touchUpInside
             )
@@ -127,13 +129,16 @@ class SearchViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalTo(bookSearchBar.snp.bottom).offset(10)
-                $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+                $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
                 $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
             }
         }
     }
     
     func configureUI() {
+        searchCollectionView.backgroundColor = Colors.backgroundColor
+        
         [searchButton].forEach {
             $0.setTitle("검색", for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
@@ -169,18 +174,22 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let library = self.library else { return }
+        let detailViewController = DetailViewController(document: library.documents[indexPath.row])
+        self.present(detailViewController, animated: true)
+    }
+    
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        <#code#>
+//        <#code#> // indexPath가 아니라 길이로 계산!
 //    }
     
 }
 
-//extension SearchViewController: UISearchBarDelegate {
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        print("hhhhhhh")
-//        conductSearch()
-//        searchBar.resignFirstResponder()
-//    }
-//    
-//}
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        conductSearch()
+        searchBar.resignFirstResponder()
+    }
+}
 

@@ -30,15 +30,15 @@ class APIManager {
         
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             // 응답 코드 확인
-            let httpResponse = response as! HTTPURLResponse
-            print(httpResponse.statusCode)
+            let httpResponse = response as? HTTPURLResponse
+            print("status:", httpResponse?.statusCode)
             
             // 데이터 받기
             guard let libraryData = data else {
                 print("error: \(error)")
                 return
             }
-            print("data: \(String(data: libraryData, encoding: .utf8))") // 데이터 출력
+//            print("data: \(String(data: libraryData, encoding: .utf8))") // 데이터 출력
             
             // 데이터 디코딩
             guard let libraryResult = try? JSONDecoder().decode(Library.self, from: libraryData) 
@@ -46,14 +46,14 @@ class APIManager {
                 print("디코딩 실패")
                 return
             }
-            print("🟡 result: \(libraryResult)")
+//            print("🟡 result: \(libraryResult)")
             completion(libraryResult)
         }.resume()
     }
     
     func fetchUrlData(url: URL) async throws -> Data {
         let (data, _) = try await URLSession.shared.data(from: url)
-        print("data: \(data)")
+//        print("data: \(data)")
         return data
     }
     
