@@ -18,12 +18,13 @@
 		1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02D92BEA8F1B00311F97 /* Colors.swift */; };
 		1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */; };
 		1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF02E12BEB205B00311F97 /* BookModel.swift */; };
-		1ADF03242BED051C00311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03232BED051C00311F97 /* SnapKit */; };
 		1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */; };
 		1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03292BED065D00311F97 /* CoreDataManager.swift */; };
 		1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */; };
 		1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */; };
 		1ADF03302BED773900311F97 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032F2BED773800311F97 /* AlertManager.swift */; };
+		1ADF03332BED89D600311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03322BED89D600311F97 /* SnapKit */; };
+		1ADF03352BED8A5E00311F97 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03342BED8A5E00311F97 /* SearchCollectionReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTableViewCell.swift; sourceTree = "<group>"; };
 		1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormattingManager.swift; sourceTree = "<group>"; };
 		1ADF032F2BED773800311F97 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		1ADF03342BED8A5E00311F97 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ADF03242BED051C00311F97 /* SnapKit in Frameworks */,
+				1ADF03332BED89D600311F97 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +96,7 @@
 			children = (
 				1ADF02CB2BEA079900311F97 /* SearchViewController.swift */,
 				1ADF02D62BEA52F100311F97 /* SearchCollectionViewCell.swift */,
+				1ADF03342BED8A5E00311F97 /* SearchCollectionReusableView.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -180,7 +183,7 @@
 			);
 			name = BookSearchApp;
 			packageProductDependencies = (
-				1ADF03232BED051C00311F97 /* SnapKit */,
+				1ADF03322BED89D600311F97 /* SnapKit */,
 			);
 			productName = BookSearchApp;
 			productReference = 1ADF02B42BEA074B00311F97 /* BookSearchApp.app */;
@@ -211,7 +214,7 @@
 			);
 			mainGroup = 1ADF02AB2BEA074B00311F97;
 			packageReferences = (
-				1ADF03222BED051C00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1ADF03312BED89D600311F97 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 1ADF02B52BEA074B00311F97 /* Products */;
 			projectDirPath = "";
@@ -239,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */,
+				1ADF03352BED8A5E00311F97 /* SearchCollectionReusableView.swift in Sources */,
 				1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */,
 				1ADF03302BED773900311F97 /* AlertManager.swift in Sources */,
 				1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */,
@@ -454,7 +458,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1ADF03222BED051C00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		1ADF03312BED89D600311F97 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -465,9 +469,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1ADF03232BED051C00311F97 /* SnapKit */ = {
+		1ADF03322BED89D600311F97 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1ADF03222BED051C00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 1ADF03312BED89D600311F97 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
