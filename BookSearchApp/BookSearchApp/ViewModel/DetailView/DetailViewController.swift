@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     let priceLabel = UILabel()
     let descriptionLabel = UILabel()
     let buttonView = UIView()
-    let cancelButton = UIButton()
+    let exitButton = UIButton()
     let addButton = UIButton()
     
     let document: Document
@@ -44,29 +44,40 @@ class DetailViewController: UIViewController {
         let viewWidth = view.bounds.width
         let contentWidth = viewWidth - 40
         
-        let buttonsHeight = 50
-        let buttonsWidth = viewWidth - 70 // (30)[cancel](10)[add](30)
-        let cancelButtonWidth = buttonsWidth * 0.3
-        let addButtonWidth = buttonsWidth * 0.7
+        let addButtonHeight = 50
+        // (30)[add](30)
+        
+        // addSubView
+        [scrollView, buttonView, exitButton].forEach {
+            view.addSubview($0)
+        }
         
         [scrollView].forEach {
-            view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
-                $0.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+                $0.top.equalToSuperview()
+                $0.horizontalEdges.equalToSuperview()
             }
         }
         
         [buttonView].forEach {
-            view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalTo(scrollView.snp.bottom)
-                $0.height.equalTo(buttonsHeight + 20)
+                $0.height.equalTo(addButtonHeight + 20)
                 $0.bottom.equalTo(view.safeAreaLayoutGuide)
                 $0.horizontalEdges.equalToSuperview()
             }
         }
+        
+        [exitButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.snp.makeConstraints {
+                $0.top.trailing.equalToSuperview().inset(30)
+                $0.height.width.equalTo(30)
+            }
+        }
+        
         
         [titleLabel].forEach {
             scrollView.addSubview($0)
@@ -124,8 +135,8 @@ class DetailViewController: UIViewController {
             buttonView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
-                $0.height.equalTo(buttonsHeight)
-                $0.width.equalTo(contentWidth)
+                $0.height.equalTo(addButtonHeight)
+                $0.width.equalTo(viewWidth - 60)
                 $0.center.equalTo(buttonView)
             }
         }
@@ -175,6 +186,7 @@ class DetailViewController: UIViewController {
                 print("image error: \(error)")
             }
         }
+        
         [thumbnailImage].forEach {
             // 이미지
             $0.contentMode = .scaleAspectFit
@@ -202,14 +214,11 @@ class DetailViewController: UIViewController {
         
         [buttonView].forEach {
             $0.backgroundColor = Colors.backgroundColor
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = Colors.lightGrayColor?.cgColor
         }
         
         [addButton].forEach {
             // title text
 //            $0.titleLabel?.text = "d" // 버튼 스타일에 따라 안 먹힐 수 있음. -> setTitle 사용
-            
             $0.setTitle(" 찜하기", for: .normal)
             $0.setTitleColor(Colors.labelColor, for: .normal)
             $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
@@ -221,6 +230,14 @@ class DetailViewController: UIViewController {
             // background
             $0.backgroundColor = Colors.yellowColor
             $0.layer.cornerRadius = 10
+        }
+        
+        [exitButton].forEach {
+            $0.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+            $0.imageView?.snp.makeConstraints {
+                $0.size.equalTo(30)
+            }
+            $0.tintColor = Colors.lightGrayColor
         }
     }
 }
