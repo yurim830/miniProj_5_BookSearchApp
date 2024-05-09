@@ -20,11 +20,23 @@ class DetailViewController: UIViewController {
     let cancelButton = UIButton()
     let addButton = UIButton()
     
+    let document: Document
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
-        configureUI()
+        configureUI(document)
     }
+    
+    init(document: Document) {
+        self.document = document
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     func setConstraints() {
         
@@ -119,7 +131,7 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func configureUI() {
+    func configureUI(_ document: Document) {
         
         view.backgroundColor = Colors.backgroundColor
         
@@ -128,7 +140,7 @@ class DetailViewController: UIViewController {
         }
         
         [titleLabel].forEach {
-            $0.text = "책 제목"
+            $0.text = document.title
             $0.numberOfLines = 0
             $0.textColor = Colors.labelColor
             $0.font = .systemFont(ofSize: 25, weight: .bold)
@@ -137,16 +149,35 @@ class DetailViewController: UIViewController {
         
         
         [authorLabel].forEach {
-            $0.text = "작가"
+            var authorsText = ""
+            for i in document.authors {
+                if authorsText == "" {
+                    authorsText.append(i)
+                } else {
+                    authorsText.append(", \(i)")
+                }
+            }
+            $0.text = authorsText
             $0.numberOfLines = 0
             $0.textColor = Colors.lightGrayColor
             $0.font = .systemFont(ofSize: 18, weight: .medium)
             $0.textAlignment = .center
         }
         
-        
+        // 이미지
+        Task {
+            do {
+                let imageURL = document.thumbnail
+                let imageData = try await APIManager.shared.fetchUrlData(url: imageURL)
+                print("imageData: \(imageData)")
+                thumbnailImage.image = UIImage(data: imageData)
+            } catch {
+                print("image error: \(error)")
+            }
+        }
         [thumbnailImage].forEach {
-            $0.image = UIImage(systemName: "photo")
+            // 이미지
+            $0.contentMode = .scaleAspectFit
             // 테두리
             $0.layer.borderColor = Colors.lightGrayColor?.cgColor
             $0.layer.borderWidth = CGFloat(1)
@@ -157,7 +188,7 @@ class DetailViewController: UIViewController {
         }
         
         [priceLabel].forEach {
-            $0.text = "가격"
+            $0.text = "\(document.price) 원"
             $0.numberOfLines = 0
             $0.textColor = Colors.labelColor
             $0.font = .systemFont(ofSize: 22, weight: .semibold)
@@ -165,7 +196,7 @@ class DetailViewController: UIViewController {
         }
         
         [descriptionLabel].forEach {
-            $0.text = "상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명"
+            $0.text = document.contents
             $0.numberOfLines = 0
             $0.textColor = Colors.labelColor
             $0.font = .systemFont(ofSize: 18, weight: .regular)
