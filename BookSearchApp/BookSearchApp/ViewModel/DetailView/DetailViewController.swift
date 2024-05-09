@@ -330,8 +330,6 @@ class DetailViewController: UIViewController {
         
         // 4. 버튼 하트 이미지 변경
         setAddButtonImageUI(added: isAdded)
-        
-        
     }
     
     

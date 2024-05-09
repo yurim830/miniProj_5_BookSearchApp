@@ -148,6 +148,7 @@ extension LikeListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let bookList = CoreDataManager.shared.readData()
         
+        cell.selectionStyle = .none
         cell.setConstraints()
         cell.configureUI(bookList[indexPath.row])
         
