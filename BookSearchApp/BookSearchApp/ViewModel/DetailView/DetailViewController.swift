@@ -178,11 +178,8 @@ class DetailViewController: UIViewController {
         [thumbnailImage].forEach {
             // 이미지
             $0.contentMode = .scaleAspectFit
-            // 테두리
-            $0.layer.borderColor = Colors.lightGrayColor?.cgColor
-            $0.layer.borderWidth = CGFloat(1)
             // 그림자
-            $0.layer.shadowOffset = CGSize(width: 5, height: 5)
+            $0.layer.shadowOffset = CGSize(width: 8, height: 8)
             $0.layer.shadowOpacity = 0.7
             $0.layer.shadowColor = Colors.lightGrayColor?.cgColor
         }

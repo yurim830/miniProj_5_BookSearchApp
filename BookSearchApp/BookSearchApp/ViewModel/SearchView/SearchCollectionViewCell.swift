@@ -29,12 +29,14 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         // 책 이미지 레이아웃
         bookImage.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.top.equalToSuperview()
+            $0.trailing.bottom.equalToSuperview().inset(10) // 그림자 들어갈 공간
         }
         
         // info뷰 레이아웃
         infoView.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.bottom.equalToSuperview().inset(10)  // 그림자 들어갈 공간
         }
         
         // info뷰에 뷰 넣기
@@ -64,9 +66,18 @@ class SearchCollectionViewCell: UICollectionViewCell {
     }
     
     func configureUI(document: Document) {
+        
+        
         // 책 사진
         [bookImage].forEach {
             $0.contentMode = .scaleToFill
+//            // 테두리
+//            $0.layer.borderWidth = 2
+//            $0.layer.borderColor = Colors.lightGrayColor?.cgColor
+            // 그림자
+            $0.layer.shadowOffset = CGSize(width: 5, height: 5)
+            $0.layer.shadowOpacity = 0.7
+            $0.layer.shadowColor = Colors.lightGrayColor?.cgColor
         }
         Task {
             do {
@@ -81,7 +92,10 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         // info뷰
         [infoView].forEach {
-            $0.backgroundColor = Colors.backgroundColor?.withAlphaComponent(0.7)
+            $0.backgroundColor = Colors.yellowColor?.withAlphaComponent(1)
+//            // 테두리
+//            $0.layer.borderWidth = 2
+//            $0.layer.borderColor = Colors.lightGrayColor?.cgColor
 //            $0.alpha = 0.8 // 이렇게 투명도 적용하면 하위 컴포넌트 전체에 투명도 적용됨.
         }
         
