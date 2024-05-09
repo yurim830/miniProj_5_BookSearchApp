@@ -13,12 +13,28 @@ class LikeListViewController: UIViewController {
     let deleteAllButton = UIButton()
     let addButton = UIButton()
     let tableView = UITableView()
-
+    
+    var myBookList: [Book]
+    
+    init() {
+        myBookList = CoreDataManager.shared.readData()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setConstraints()
         configureUI()
+        setTableView()
     }
+    
+  
+    
     
     // MARK: - layout & Design
     func setConstraints() {
@@ -53,6 +69,8 @@ class LikeListViewController: UIViewController {
             }
         }
         
+        print("safeAreaInsets: \(view.safeAreaInsets)")
+        print("safeAreaWidth: \(view.safeAreaLayoutGuide.layoutFrame.width)")
         [tableView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +102,37 @@ class LikeListViewController: UIViewController {
             $0.setTitleColor(Colors.greenColor, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         }
+    }
+    
+    // MARK: - TableView 셋팅
+    func setTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(LikeListTableViewCell.self, forCellReuseIdentifier: LikeListTableViewCell.identifier)
+    }
+    
+}
+
+
+
+extension LikeListViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return myBookList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LikeListTableViewCell.identifier, for: indexPath) as? LikeListTableViewCell
+        else { return UITableViewCell() }
         
+        let bookList = CoreDataManager.shared.readData()
+        
+        cell.setConstraints()
+        cell.configureUI(bookList[indexPath.row])
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
