@@ -30,6 +30,7 @@ class LikeListViewController: UIViewController {
         setConstraints()
         configureUI()
         setTableView()
+        addActionToDeleteAllButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,15 @@ class LikeListViewController: UIViewController {
         tableView.reloadData()
     }
   
+    // MARK: - 버튼 액션 설정
+    func addActionToDeleteAllButton() {
+        deleteAllButton.addAction(
+            UIAction { _ in
+                AlertManager.deleteEveryDataAlert(vc: self)
+            },
+            for: .touchUpInside
+        )
+    }
     
     
     // MARK: - layout & Design

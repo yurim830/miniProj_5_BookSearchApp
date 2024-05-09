@@ -69,6 +69,21 @@ class CoreDataManager {
         try? context.save()
     }
     
+    func deleteEveryData() {
+        guard let context = self.persistentContainer?.viewContext else { return }
+        
+        let request = Book.fetchRequest()
+        
+        guard let bookList = try? context.fetch(request) else { return }
+        
+        for i in bookList {
+            context.delete(i)
+        }
+        
+        try? context.save()
+    }
+    
+    
     // MARK: - 데이터 확인 함수
     // 특정 데이터가 CoreData에 있는지 확인하고, 해당 데이터의 index 번호를 반환한다. 없으면 nil 반환.
     func returnIndexIfHasTarget(_ targetIsbn: String) -> Int? {

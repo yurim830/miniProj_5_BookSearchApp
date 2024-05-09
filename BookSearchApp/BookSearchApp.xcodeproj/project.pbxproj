@@ -23,6 +23,7 @@
 		1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03292BED065D00311F97 /* CoreDataManager.swift */; };
 		1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */; };
 		1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */; };
+		1ADF03302BED773900311F97 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032F2BED773800311F97 /* AlertManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		1ADF03292BED065D00311F97 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTableViewCell.swift; sourceTree = "<group>"; };
 		1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormattingManager.swift; sourceTree = "<group>"; };
+		1ADF032F2BED773800311F97 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				1ADF02DF2BEAA0FF00311F97 /* APIManager.swift */,
 				1ADF03292BED065D00311F97 /* CoreDataManager.swift */,
 				1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */,
+				1ADF032F2BED773800311F97 /* AlertManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			files = (
 				1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */,
 				1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */,
+				1ADF03302BED773900311F97 /* AlertManager.swift in Sources */,
 				1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */,
 				1ADF02D02BEA07B700311F97 /* BottomTabBarController.swift in Sources */,
 				1ADF02E02BEAA0FF00311F97 /* APIManager.swift in Sources */,
