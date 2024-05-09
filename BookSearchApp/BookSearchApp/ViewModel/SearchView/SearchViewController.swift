@@ -92,6 +92,7 @@ class SearchViewController: UIViewController {
     func setCollectionView() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         searchCollectionView.dataSource = self
+        searchCollectionView.delegate = self
         
     }
     
@@ -117,7 +118,8 @@ class SearchViewController: UIViewController {
             // add Action
             $0.addAction(
                 UIAction { _ in
-                    self.conductSearch()
+//                    self.conductSearch()
+                    self.searchBarSearchButtonClicked(self.bookSearchBar)
                 }
                 , for: .touchUpInside
             )
@@ -187,6 +189,5 @@ extension SearchViewController: UISearchBarDelegate {
         conductSearch()
         searchBar.resignFirstResponder()
     }
-    
 }
 

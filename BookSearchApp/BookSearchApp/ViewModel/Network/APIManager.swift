@@ -30,8 +30,8 @@ class APIManager {
         
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             // 응답 코드 확인
-            let httpResponse = response as! HTTPURLResponse
-            print(httpResponse.statusCode)
+            let httpResponse = response as? HTTPURLResponse
+            print(httpResponse?.statusCode)
             
             // 데이터 받기
             guard let libraryData = data else {
