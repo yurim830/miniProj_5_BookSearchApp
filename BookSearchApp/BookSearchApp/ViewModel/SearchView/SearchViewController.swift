@@ -53,7 +53,6 @@ class SearchViewController: UIViewController {
             self.library = libraryResult
             DispatchQueue.main.async {
                 self.searchCollectionView.reloadData()
-                print("Library fetched. \(self.library?.documents[0].title)")
             }
         }
     }
