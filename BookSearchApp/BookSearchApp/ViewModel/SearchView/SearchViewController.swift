@@ -44,6 +44,7 @@ class SearchViewController: UIViewController {
         setConstraints()
         configureUI()
         setCollectionView()
+        bookSearchBar.delegate = self
     }
     
     // MARK: - 데이터 함수
@@ -91,7 +92,7 @@ class SearchViewController: UIViewController {
     func setCollectionView() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         searchCollectionView.dataSource = self
-        searchCollectionView.delegate = self
+        
     }
     
     func setConstraints() {
@@ -169,15 +170,20 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let library = self.library else { return }
+        let detailViewController = DetailViewController(document: library.documents[indexPath.row])
+        self.present(detailViewController, animated: true)
+    }
+    
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        <#code#>
+//        <#code#> // indexPath가 아니라 길이로 계산!
 //    }
     
 }
 
 //extension SearchViewController: UISearchBarDelegate {
 //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        print("hhhhhhh")
 //        conductSearch()
 //        searchBar.resignFirstResponder()
 //    }
