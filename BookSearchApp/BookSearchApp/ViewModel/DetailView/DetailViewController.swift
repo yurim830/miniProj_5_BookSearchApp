@@ -26,6 +26,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setConstraints()
         configureUI(document)
+        setButtonAction()
     }
     
     init(document: Document) {
@@ -73,7 +74,7 @@ class DetailViewController: UIViewController {
         [exitButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
-                $0.top.trailing.equalToSuperview().inset(30)
+                $0.top.leading.equalToSuperview().inset(20)
                 $0.height.width.equalTo(30)
             }
         }
@@ -83,7 +84,7 @@ class DetailViewController: UIViewController {
             scrollView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(30)
+                $0.top.equalToSuperview().offset(50)
                 $0.width.equalTo(contentWidth)
                 $0.centerX.equalToSuperview()
             }
@@ -233,11 +234,33 @@ class DetailViewController: UIViewController {
         }
         
         [exitButton].forEach {
-            $0.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark"), for: .normal)
+            $0.imageView?.contentMode = .scaleAspectFit
             $0.imageView?.snp.makeConstraints {
-                $0.size.equalTo(30)
+                $0.size.equalTo(25)
             }
             $0.tintColor = Colors.lightGrayColor
         }
     }
+    
+    // MARK: - 버튼 액션 추가
+    func setButtonAction() {
+        // addButton
+        addButton.addAction(
+            UIAction { _ in
+                
+            }
+            , for: .touchUpInside
+        )
+        
+        // exit button
+        exitButton.addAction(
+            UIAction { _ in
+                self.dismiss(animated: true)
+            },
+            for: .touchUpInside
+        )
+    }
+    
+    
 }
