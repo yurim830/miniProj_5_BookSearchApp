@@ -31,6 +31,7 @@ class LikeListViewController: UIViewController {
         configureUI()
         setTableView()
         addActionToDeleteAllButton()
+        addActionToAddButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +50,13 @@ class LikeListViewController: UIViewController {
         )
     }
     
+    func addActionToAddButton() {
+        addButton.addAction(
+            UIAction { _ in
+                self.tabBarController?.selectedIndex = 0
+            },
+            for: .touchUpInside)
+    }
     
     // MARK: - layout & Design
     func setConstraints() {
