@@ -27,7 +27,7 @@ class DetailViewController: UIViewController {
     let document: Document
     var isAdded: Bool {
         didSet {
-            setAddButtonUI(added: isAdded)
+            
         }
     }
     
@@ -36,7 +36,8 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setConstraints()
         configureUI(document)
-        setAddButtonAction()
+        setAddButtonViewAction()
+        setExitButtonAction()
     }
     
     init(document: Document) {
@@ -166,16 +167,6 @@ class DetailViewController: UIViewController {
             }
         }
         
-//        // 삭제 예정
-//        [addButton].forEach {
-//            buttonView.addSubview($0)
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.snp.makeConstraints {
-//                $0.height.equalTo(addButtonHeight)
-//                $0.width.equalTo(viewWidth - 60)
-//                $0.center.equalTo(buttonView)
-//            }
-//        }
         
         // MARK: - ExitButton
         [exitButton].forEach {
@@ -225,7 +216,7 @@ class DetailViewController: UIViewController {
             do {
                 let imageURL = document.thumbnail
                 let imageData = try await APIManager.shared.fetchUrlData(url: imageURL)
-                print("imageData: \(imageData)")
+//                print("imageData: \(imageData)")
                 thumbnailImage.image = UIImage(data: imageData)
             } catch {
                 print("image error: \(error)")
@@ -261,22 +252,6 @@ class DetailViewController: UIViewController {
             $0.backgroundColor = Colors.backgroundColor
         }
         
-//        [addButton].forEach {
-//            // title text
-////            $0.titleLabel?.text = "d" // 버튼 스타일에 따라 안 먹힐 수 있음. -> setTitle 사용
-//            $0.setTitle(" 찜하기", for: .normal)
-//            $0.setTitleColor(Colors.labelColor, for: .normal)
-//            $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
-//            
-//            // heart icon
-//            $0.setImage(UIImage(systemName: "heart"), for: .normal)
-//            $0.tintColor = Colors.labelColor
-//            
-//            // background
-//            $0.backgroundColor = Colors.yellowColor
-//            $0.layer.cornerRadius = 10
-//        }
-//        
         [addButtonView].forEach {
             $0.backgroundColor = Colors.yellowColor
             $0.layer.cornerRadius = 10
@@ -288,13 +263,7 @@ class DetailViewController: UIViewController {
             $0.font = .boldSystemFont(ofSize: 18)
         }
         
-        [addButtonImage].forEach {
-            // heart icon
-            $0.image = UIImage(systemName: "heart")
-            $0.contentMode = .scaleAspectFit
-            $0.tintColor = Colors.labelColor
-        }
-        
+        setAddButtonImageUI(added: self.isAdded)
         
         [exitButton].forEach {
             $0.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -306,8 +275,8 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func setAddButtonUI(added: Bool) {
-        
+    func setAddButtonImageUI(added: Bool) {
+        print("setAddButtonImageUI")
         switch added {
         case true:
             // 빨갛게 찬 하트
@@ -326,33 +295,43 @@ class DetailViewController: UIViewController {
                 $0.tintColor = Colors.labelColor
             }
         }
+        
     }
     
     // MARK: - 버튼 액션 추가
-    func setAddButtonAction() {
-        // addButton
-        addButton.addAction(
-            UIAction { _ in
-                
-                // 1. 현재 데이터가 CoreData에 있는지 확인
-                guard let index = CoreDataManager.shared
-                    .returnIndexIfHasTarget(self.document.isbn) else {
-                // MARK: CoreData에 없을 경우
-                    // 2-1. 저장
-                    CoreDataManager.shared.saveData(self.document)
-                    return
-                }
-                // MARK: CoreData에 있는 경우
-                // 2-2. 삭제
-                CoreDataManager.shared.deleteData(index)
-                
-                // 3. isAdded 값 변경 (-> didSet으로 버튼 UI 변경됨)
-                self.isAdded = !self.isAdded
-            }
-            , for: .touchUpInside
-        )
+    // addButton뷰에 tapGesture action 등록
+    func setAddButtonViewAction() {
+        print("setAddButtonViewAction")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAddButton(_:))) // UIImageView 클릭 제스쳐
+        addButtonView.addGestureRecognizer(tapGesture)
+        addButtonView.isUserInteractionEnabled = true
         
-        // exit button
+    }
+    
+    @objc func tappedAddButton(_ gesture: UITapGestureRecognizer) {
+        // 1. 현재 데이터가 CoreData에 있는지 확인
+        guard let index = CoreDataManager.shared
+            .returnIndexIfHasTarget(self.document.isbn) else {
+            
+        // 2-1. CoreData에 없을 경우 -> 저장
+            print("저장할거다!")
+            CoreDataManager.shared.saveData(self.document)
+            return
+        }
+        // 2-2. CoreData에 있는 경우 -> 삭제
+        print("삭제할거다!")
+        CoreDataManager.shared.deleteData(index)
+        
+        // 3. isAdded 값 변경
+        self.isAdded = !self.isAdded
+        
+        // 4. 버튼 하트 이미지 변경
+        setAddButtonImageUI(added: isAdded)
+    }
+    
+    
+    // x버튼
+    func setExitButtonAction() {
         exitButton.addAction(
             UIAction { _ in
                 self.dismiss(animated: true)
@@ -360,6 +339,4 @@ class DetailViewController: UIViewController {
             for: .touchUpInside
         )
     }
-    
-    
 }

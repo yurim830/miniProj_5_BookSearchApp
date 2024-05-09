@@ -50,7 +50,7 @@ class CoreDataManager {
         
         let request = Book.fetchRequest()    // fetchRequest: Entity에 대해 코어데이터에서 특정 조건에 맞는 데이터 요청
         let bookList = try? context.fetch(request) // 요청된 데이터 가져옴
-        print(bookList)
+        print("[read] 개수: \(bookList?.count)")
         return bookList ?? []
     }
     
@@ -69,7 +69,7 @@ class CoreDataManager {
         try? context.save()
     }
     
-    // MARK: - 데이터 확인 후 인덱스 반환
+    // MARK: - 데이터 확인 함수
     // 특정 데이터가 CoreData에 있는지 확인하고, 해당 데이터의 index 번호를 반환한다. 없으면 nil 반환.
     func returnIndexIfHasTarget(_ targetIsbn: String) -> Int? {
         let savedBooks = readData() // coreData에 저장된 [Book]
@@ -80,5 +80,16 @@ class CoreDataManager {
             }
         }
         return nil
+    }
+    
+    func returnTrueIfHasTarget(_ targetIsbn: String) -> Bool {
+        let savedBooks = readData() // coreData에 저장된 [Book]
+        
+        for (index, book) in savedBooks.enumerated() {
+            if book.isbn == targetIsbn {
+                return true
+            }
+        }
+        return false
     }
 }

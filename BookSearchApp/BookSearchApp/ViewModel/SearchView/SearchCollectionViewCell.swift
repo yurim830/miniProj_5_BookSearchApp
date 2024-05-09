@@ -83,7 +83,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
             do {
                 let imageURL = document.thumbnail
                 let imageData = try await APIManager.shared.fetchUrlData(url: imageURL)
-                print("imageData: \(imageData)")
+//                print("imageData: \(imageData)")
                 bookImage.image = UIImage(data: imageData)
             } catch {
                 print("image error: \(error)")
