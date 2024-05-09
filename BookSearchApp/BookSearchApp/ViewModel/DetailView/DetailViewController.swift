@@ -276,7 +276,7 @@ class DetailViewController: UIViewController {
     }
     
     func setAddButtonImageUI(added: Bool) {
-        print("setAddButtonImageUI")
+        print("change add button image❤️")
         switch added {
         case true:
             // 빨갛게 찬 하트
@@ -301,7 +301,6 @@ class DetailViewController: UIViewController {
     // MARK: - 버튼 액션 추가
     // addButton뷰에 tapGesture action 등록
     func setAddButtonViewAction() {
-        print("setAddButtonViewAction")
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAddButton(_:))) // UIImageView 클릭 제스쳐
         addButtonView.addGestureRecognizer(tapGesture)
         addButtonView.isUserInteractionEnabled = true
@@ -309,6 +308,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func tappedAddButton(_ gesture: UITapGestureRecognizer) {
+        print("👆Button tapped!")
         // 1. 현재 데이터가 CoreData에 있는지 확인
         guard let index = CoreDataManager.shared
             .returnIndexIfHasTarget(self.document.isbn) else {
