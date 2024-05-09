@@ -16,6 +16,9 @@ class DetailViewController: UIViewController {
     let thumbnailImage = UIImageView()
     let priceLabel = UILabel()
     let descriptionLabel = UILabel()
+    let buttonView = UIView()
+    let cancelButton = UIButton()
+    let addButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +29,30 @@ class DetailViewController: UIViewController {
     func setConstraints() {
         
         let verticalSpacing = 10
-        let width = view.bounds.width
+        let viewWidth = view.bounds.width
+        let contentWidth = viewWidth - 40
+        
+        let buttonsHeight = 50
+        let buttonsWidth = viewWidth - 70 // (30)[cancel](10)[add](30)
+        let cancelButtonWidth = buttonsWidth * 0.3
+        let addButtonWidth = buttonsWidth * 0.7
         
         [scrollView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
-                $0.edges.equalToSuperview()
+                $0.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            }
+        }
+        
+        [buttonView].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.snp.makeConstraints {
+                $0.top.equalTo(scrollView.snp.bottom)
+                $0.height.equalTo(buttonsHeight + 20)
+                $0.bottom.equalTo(view.safeAreaLayoutGuide)
+                $0.horizontalEdges.equalToSuperview()
             }
         }
         
@@ -41,7 +61,7 @@ class DetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalToSuperview().offset(30)
-                $0.width.equalTo(width - 60)
+                $0.width.equalTo(contentWidth)
                 $0.centerX.equalToSuperview()
             }
         }
@@ -51,7 +71,7 @@ class DetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
-                $0.width.equalTo(width - 60)
+                $0.width.equalTo(contentWidth)
                 $0.centerX.equalToSuperview()
             }
         }
@@ -72,7 +92,7 @@ class DetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalTo(thumbnailImage.snp.bottom).offset(verticalSpacing)
-                $0.width.equalTo(width - 60)
+                $0.width.equalTo(contentWidth)
                 $0.centerX.equalToSuperview()
             }
         }
@@ -82,14 +102,26 @@ class DetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
                 $0.top.equalTo(priceLabel.snp.bottom).offset(verticalSpacing + 10)
-                $0.width.equalTo(width - 60)
+                $0.width.equalTo(contentWidth)
                 $0.centerX.equalToSuperview()
                 $0.bottom.equalToSuperview().inset(30)
+            }
+        }
+        
+        [addButton].forEach {
+            buttonView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.snp.makeConstraints {
+                $0.height.equalTo(buttonsHeight)
+                $0.width.equalTo(contentWidth)
+                $0.center.equalTo(buttonView)
             }
         }
     }
     
     func configureUI() {
+        
+        view.backgroundColor = Colors.backgroundColor
         
         [scrollView].forEach {
             $0.backgroundColor = Colors.backgroundColor
@@ -128,7 +160,7 @@ class DetailViewController: UIViewController {
             $0.text = "가격"
             $0.numberOfLines = 0
             $0.textColor = Colors.labelColor
-            $0.font = .systemFont(ofSize: 25, weight: .semibold)
+            $0.font = .systemFont(ofSize: 22, weight: .semibold)
             $0.textAlignment = .center
         }
         
@@ -140,5 +172,27 @@ class DetailViewController: UIViewController {
             $0.textAlignment = .left
         }
         
+        [buttonView].forEach {
+            $0.backgroundColor = Colors.backgroundColor
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = Colors.lightGrayColor?.cgColor
+        }
+        
+        [addButton].forEach {
+            // title text
+//            $0.titleLabel?.text = "d" // 버튼 스타일에 따라 안 먹힐 수 있음. -> setTitle 사용
+            
+            $0.setTitle(" 찜하기", for: .normal)
+            $0.setTitleColor(Colors.labelColor, for: .normal)
+            $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
+            
+            // heart icon
+            $0.setImage(UIImage(systemName: "heart"), for: .normal)
+            $0.tintColor = Colors.labelColor
+            
+            // background
+            $0.backgroundColor = Colors.yellowColor
+            $0.layer.cornerRadius = 10
+        }
     }
 }
