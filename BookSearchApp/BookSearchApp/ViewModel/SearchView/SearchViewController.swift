@@ -45,7 +45,16 @@ class SearchViewController: UIViewController {
         configureUI()
         setCollectionView()
         bookSearchBar.delegate = self
+        // notification observer (임시)
+//        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.presentedDetailView, object: nil)
     }
+    
+//    // MARK: - Notification으로 실행시킬 함수
+//    @objc func reloadSearchCollectionView() {
+//        self.searchCollectionView.reloadData()
+//        print("notification 작동함 🎬")
+//    }
+    
     
     // MARK: - 데이터 함수
     func fetchLibraryData(query: String, page: Int) {

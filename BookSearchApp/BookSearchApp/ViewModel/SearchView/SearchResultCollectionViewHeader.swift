@@ -10,6 +10,7 @@ import SnapKit
 
 class SearchResultCollectionViewHeader: UICollectionReusableView {
     
+    
     // 헤더뷰에 최근 본 책도 들어간다!!
     // 헤더뷰 총 높이: 230
     /* | 간격: 10
@@ -47,12 +48,23 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
         return layout
     }()
     
+    
     // MARK: - 헤더뷰 configure 함수
     // must conoduct
     func configureHeaderView(header: String) {
         setCollectionView()
         setConstraints()
         configureUI(header: header)
+        // notification observer (임시)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.presentedDetailView, object: nil)
+    }
+    
+    // MARK: - Notification으로 실행시킬 함수
+    @objc func reloadSearchCollectionView() {
+        print("before: \(TenRecentBooks.shared.tenRecentBooks[0]?.title)")
+        self.recentBooksCollectionView.reloadData()
+        print("notification 작동함 🎬")
+        print("after: \(TenRecentBooks.shared.tenRecentBooks[0]?.title)")
     }
     
     // MARK: - 헤더뷰 configure 함수 상세

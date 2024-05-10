@@ -30,6 +30,7 @@ class RecentBooksCollectionViewCell: UICollectionViewCell {
         }
         Task {
             do {
+                print("📌 thumbnail: \(document?.thumbnail)")
                 guard let imageURL = document?.thumbnail else {
                     print("imageURL 없음")
                     bookImage.image = UIImage(named: "BookShelfItem")
