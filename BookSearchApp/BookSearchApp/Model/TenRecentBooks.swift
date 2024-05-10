@@ -11,7 +11,7 @@ class TenRecentBooks {
     
     static let shared = TenRecentBooks()
     
-    var tenRecentBooks: [Document?] = [nil, nil, nil, nil] {
+    var tenRecentBooks: [Document?] = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil] {
         /* 규칙:
          1. insert 메소드로 0번째 인덱스에 새로운 값 추가됨
          2. 배열의 길이는 10으로 유지됨

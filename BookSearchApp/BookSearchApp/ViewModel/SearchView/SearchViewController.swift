@@ -194,8 +194,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         let searchBarText = bookSearchBar.text
         let headerText = (searchBarText != nil && searchBarText != "") ? "🔍 검색 결과" : ""
         
-        header.configureUI(header: headerText)
-        header.setConstraints()
+        header.configureHeaderView(header: headerText)
         return header
     }
     
@@ -207,7 +206,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 220)
+        return CGSize(width: collectionView.frame.width, height: 230)
     }
 }
 

@@ -25,16 +25,14 @@ class RecentBooksCollectionViewCell: UICollectionViewCell {
     
     func configureUI(_ document: Document?) {
         [bookImage].forEach {
-            $0.contentMode = .scaleToFill
-            // 그림자
-            $0.layer.shadowOffset = CGSize(width: 3, height: 3)
-            $0.layer.shadowOpacity = 0.7
-            $0.layer.shadowColor = Colors.lightGrayColor?.cgColor
+            $0.contentMode = .scaleAspectFit
+
         }
         Task {
             do {
                 guard let imageURL = document?.thumbnail else {
-                    bookImage.backgroundColor = Colors.bookShelfItemColor
+                    print("imageURL 없음")
+                    bookImage.image = UIImage(named: "BookShelfItem")
                     return
                 }
                 let imageData = try await APIManager.shared.fetchUrlData(url: imageURL)
