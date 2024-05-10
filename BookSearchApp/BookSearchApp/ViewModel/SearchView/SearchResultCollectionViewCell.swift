@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class SearchCollectionViewCell: UICollectionViewCell {
+class SearchResultCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = String(describing: SearchCollectionViewCell.self)
+    static let identifier = String(describing: SearchResultCollectionViewCell.self)
     
     // MARK: - UIComponents
     let bookImage = UIImageView()

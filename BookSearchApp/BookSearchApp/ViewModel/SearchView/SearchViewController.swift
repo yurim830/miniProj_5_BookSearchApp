@@ -89,7 +89,8 @@ class SearchViewController: UIViewController {
     
     // MARK: - 레이아웃 설정 함수
     func setCollectionView() {
-        searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
+        searchCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+        searchCollectionView.register(SearchCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchCollectionHeaderView.identifier)
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
         
@@ -160,8 +161,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SearchCollectionViewCell.identifier,
-            for: indexPath) as? SearchCollectionViewCell,
+            withReuseIdentifier: SearchResultCollectionViewCell.identifier,
+            for: indexPath) as? SearchResultCollectionViewCell,
               let library = self.library
         else {
             return UICollectionViewCell()
@@ -174,10 +175,28 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return cell
     }
     
+    // 아이템 선택 시 액션 설정
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let library = self.library else { return }
         let detailViewController = DetailViewController(document: library.documents[indexPath.row])
         self.present(detailViewController, animated: true)
+    }
+    
+    // 헤더 불러오고 사용하기
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader, // 헤더일때
+              let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: SearchCollectionHeaderView.identifier,
+                for: indexPath
+              ) as? SearchCollectionHeaderView else {return UICollectionReusableView()}
+        
+        let searchBarText = bookSearchBar.text
+        let headerText = (searchBarText != nil && searchBarText != "") ? "🔍 검색 결과" : "🧐 흠... 검색 결과가 없습니다."
+        
+        header.configureUI(header: headerText)
+        header.setConstraints()
+        return header
     }
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -185,6 +204,14 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 //    }
     
 }
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 60)
+    }
+}
+
+
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
