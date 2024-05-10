@@ -39,6 +39,8 @@ class RecentBooksCollectionViewCell: UICollectionViewCell {
                 let imageData = try await APIManager.shared.fetchUrlData(url: imageURL)
 //                print("imageData: \(imageData)")
                 bookImage.image = UIImage(data: imageData)
+                bookImage.layer.borderWidth = 5
+                bookImage.layer.borderColor = Colors.bookShelfFrameColor?.cgColor
             } catch {
                 print("image error: \(error)")
             }
