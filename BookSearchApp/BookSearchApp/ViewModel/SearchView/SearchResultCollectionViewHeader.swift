@@ -16,7 +16,7 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
        firstTitle: 최근 검색 결과 (높이: 25)
        | 간격: 10
      --------------bookShelf(간격: 10)--------------
-       collectionView : 최근 본 책 10개 (높이: 100)
+       collectionView : 최근 본 책 10개 (높이: 100) / (책 높이: 100, 책 너비: 70)
      --------------bookShelf(간격: 10)--------------
        | 간격: 20
        secondTitle: 검색 결과 (높이: 25)
