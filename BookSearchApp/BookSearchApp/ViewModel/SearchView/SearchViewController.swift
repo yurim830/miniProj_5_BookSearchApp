@@ -45,7 +45,16 @@ class SearchViewController: UIViewController {
         configureUI()
         setCollectionView()
         bookSearchBar.delegate = self
+        // notification observer (임시)
+//        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.presentedDetailView, object: nil)
     }
+    
+//    // MARK: - Notification으로 실행시킬 함수
+//    @objc func reloadSearchCollectionView() {
+//        self.searchCollectionView.reloadData()
+//        print("notification 작동함 🎬")
+//    }
+    
     
     // MARK: - 데이터 함수
     func fetchLibraryData(query: String, page: Int) {
@@ -89,7 +98,8 @@ class SearchViewController: UIViewController {
     
     // MARK: - 레이아웃 설정 함수
     func setCollectionView() {
-        searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
+        searchCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+        searchCollectionView.register(SearchResultCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchResultCollectionViewHeader.identifier)
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
         
@@ -160,8 +170,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SearchCollectionViewCell.identifier,
-            for: indexPath) as? SearchCollectionViewCell,
+            withReuseIdentifier: SearchResultCollectionViewCell.identifier,
+            for: indexPath) as? SearchResultCollectionViewCell,
               let library = self.library
         else {
             return UICollectionViewCell()
@@ -174,10 +184,33 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return cell
     }
     
+    // 아이템 선택 시 액션 설정
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let library = self.library else { return }
         let detailViewController = DetailViewController(document: library.documents[indexPath.row])
+        
+        // DetailView 모달 띄우기
         self.present(detailViewController, animated: true)
+        
+        // TenRecentBooks에 추가
+        TenRecentBooks.shared.appendNewBook(library.documents[indexPath.row])
+        print("TenRecentBooks: \(TenRecentBooks.shared.tenRecentBooks)")
+    }
+    
+    // 헤더 불러오고 사용하기
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader, // 헤더일때
+              let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: SearchResultCollectionViewHeader.identifier,
+                for: indexPath
+              ) as? SearchResultCollectionViewHeader else {return UICollectionReusableView()}
+        
+        let searchBarText = bookSearchBar.text
+        let headerText = (searchBarText != nil && searchBarText != "") ? "🔍 검색 결과" : ""
+        
+        header.configureHeaderView(header: headerText)
+        return header
     }
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -185,6 +218,14 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 //    }
     
 }
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 230)
+    }
+}
+
+
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
