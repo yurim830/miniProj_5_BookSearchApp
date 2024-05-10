@@ -16,5 +16,5 @@ class Colors {
     static let blueColor = UIColor(named: "blueColor")
     static let greenColor = UIColor(named: "greenColor")
     static let bookShelfBgColor = UIColor(named: "bookShelfBgColor")
-    static let bookShelfItemColor = UIColor(named: "bookShelfItemColor")
+    static let bookShelfFrameColor = UIColor(named: "bookShelfFrameColor")
 }
