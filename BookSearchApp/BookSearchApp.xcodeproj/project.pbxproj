@@ -24,8 +24,9 @@
 		1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */; };
 		1ADF03302BED773900311F97 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032F2BED773800311F97 /* AlertManager.swift */; };
 		1ADF03332BED89D600311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03322BED89D600311F97 /* SnapKit */; };
-		1ADF03352BED8A5E00311F97 /* SearchCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03342BED8A5E00311F97 /* SearchCollectionHeaderView.swift */; };
-		1ADF03372BEDC3AB00311F97 /* SearchHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03362BEDC3AB00311F97 /* SearchHistoryCollectionViewCell.swift */; };
+		1ADF03352BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */; };
+		1ADF03392BEDCEB600311F97 /* TenRecentBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */; };
+		1ADF033B2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,8 +48,9 @@
 		1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTableViewCell.swift; sourceTree = "<group>"; };
 		1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormattingManager.swift; sourceTree = "<group>"; };
 		1ADF032F2BED773800311F97 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
-		1ADF03342BED8A5E00311F97 /* SearchCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionHeaderView.swift; sourceTree = "<group>"; };
-		1ADF03362BEDC3AB00311F97 /* SearchHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewHeader.swift; sourceTree = "<group>"; };
+		1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenRecentBooks.swift; sourceTree = "<group>"; };
+		1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentBooksCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +99,9 @@
 			isa = PBXGroup;
 			children = (
 				1ADF02CB2BEA079900311F97 /* SearchViewController.swift */,
-				1ADF03342BED8A5E00311F97 /* SearchCollectionHeaderView.swift */,
+				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
 				1ADF02D62BEA52F100311F97 /* SearchResultCollectionViewCell.swift */,
-				1ADF03362BEDC3AB00311F97 /* SearchHistoryCollectionViewCell.swift */,
+				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -122,6 +124,7 @@
 				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
 				1ADF02E12BEB205B00311F97 /* BookModel.swift */,
 				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
+				1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,7 +248,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */,
-				1ADF03352BED8A5E00311F97 /* SearchCollectionHeaderView.swift in Sources */,
+				1ADF03352BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift in Sources */,
+				1ADF033B2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift in Sources */,
 				1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */,
 				1ADF03302BED773900311F97 /* AlertManager.swift in Sources */,
 				1ADF02DA2BEA8F1B00311F97 /* Colors.swift in Sources */,
@@ -254,11 +258,11 @@
 				1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */,
 				1ADF03272BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld in Sources */,
 				1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */,
+				1ADF03392BEDCEB600311F97 /* TenRecentBooks.swift in Sources */,
 				1ADF02CE2BEA07A400311F97 /* LikeListViewController.swift in Sources */,
 				1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */,
 				1ADF02D22BEA3D5700311F97 /* DetailViewController.swift in Sources */,
 				1ADF02B82BEA074B00311F97 /* AppDelegate.swift in Sources */,
-				1ADF03372BEDC3AB00311F97 /* SearchHistoryCollectionViewCell.swift in Sources */,
 				1ADF02D72BEA52F100311F97 /* SearchResultCollectionViewCell.swift in Sources */,
 				1ADF02BA2BEA074B00311F97 /* SceneDelegate.swift in Sources */,
 			);

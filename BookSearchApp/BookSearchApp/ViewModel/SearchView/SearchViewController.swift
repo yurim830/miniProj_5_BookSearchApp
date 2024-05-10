@@ -90,7 +90,7 @@ class SearchViewController: UIViewController {
     // MARK: - 레이아웃 설정 함수
     func setCollectionView() {
         searchCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
-        searchCollectionView.register(SearchCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchCollectionHeaderView.identifier)
+        searchCollectionView.register(SearchResultCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchResultCollectionViewHeader.identifier)
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
         
@@ -187,12 +187,12 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         guard kind == UICollectionView.elementKindSectionHeader, // 헤더일때
               let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
-                withReuseIdentifier: SearchCollectionHeaderView.identifier,
+                withReuseIdentifier: SearchResultCollectionViewHeader.identifier,
                 for: indexPath
-              ) as? SearchCollectionHeaderView else {return UICollectionReusableView()}
+              ) as? SearchResultCollectionViewHeader else {return UICollectionReusableView()}
         
         let searchBarText = bookSearchBar.text
-        let headerText = (searchBarText != nil && searchBarText != "") ? "🔍 검색 결과" : "🧐 흠... 검색 결과가 없습니다."
+        let headerText = (searchBarText != nil && searchBarText != "") ? "🔍 검색 결과" : ""
         
         header.configureUI(header: headerText)
         header.setConstraints()
@@ -207,7 +207,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 60)
+        return CGSize(width: collectionView.frame.width, height: 220)
     }
 }
 
