@@ -24,4 +24,9 @@ class TenRecentBooks {
             }
         }
     }
+    
+    func appendNewBook(_ document: Document) {
+        tenRecentBooks.insert(document, at: 0)
+    }
+    
 }

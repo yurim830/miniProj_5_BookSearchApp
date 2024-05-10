@@ -179,7 +179,13 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let library = self.library else { return }
         let detailViewController = DetailViewController(document: library.documents[indexPath.row])
+        
+        // DetailView 모달 띄우기
         self.present(detailViewController, animated: true)
+        
+        // TenRecentBooks에 추가
+        TenRecentBooks.shared.appendNewBook(library.documents[indexPath.row])
+        print("TenRecentBooks: \(TenRecentBooks.shared.tenRecentBooks)")
     }
     
     // 헤더 불러오고 사용하기
