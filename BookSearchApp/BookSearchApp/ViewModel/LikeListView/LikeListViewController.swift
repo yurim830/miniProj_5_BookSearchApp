@@ -53,7 +53,10 @@ class LikeListViewController: UIViewController {
     func addActionToAddButton() {
         addButton.addAction(
             UIAction { _ in
+                // 0번 탭(서치뷰)으로 이동
                 self.tabBarController?.selectedIndex = 0
+                // 서치바 활성화
+                NotificationCenter.default.post(name: Notification.Name.setSearchBarFirstResponder, object: nil)
             },
             for: .touchUpInside)
     }
