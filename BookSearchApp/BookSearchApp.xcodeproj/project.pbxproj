@@ -29,6 +29,7 @@
 		1ADF033D2BEDFD7F00311F97 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */; };
 		1ADF03462BEFEC8400311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03452BEFEC8400311F97 /* SnapKit */; };
 		1ADF03482BEFECEE00311F97 /* SearchResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03472BEFECEE00311F97 /* SearchResultCollectionView.swift */; };
+		1ADF034D2BF00C1300311F97 /* RecentBooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentBooksCollectionViewCell.swift; sourceTree = "<group>"; };
 		1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		1ADF03472BEFECEE00311F97 /* SearchResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionView.swift; sourceTree = "<group>"; };
+		1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentBooksCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
+				1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */,
 				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
 			);
 			path = HeaderView;
@@ -272,6 +275,7 @@
 				1ADF033D2BEDFD7F00311F97 /* NotificationName.swift in Sources */,
 				1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */,
 				1ADF03352BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift in Sources */,
+				1ADF034D2BF00C1300311F97 /* RecentBooksCollectionView.swift in Sources */,
 				1ADF033B2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift in Sources */,
 				1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */,
 				1ADF03302BED773900311F97 /* AlertManager.swift in Sources */,

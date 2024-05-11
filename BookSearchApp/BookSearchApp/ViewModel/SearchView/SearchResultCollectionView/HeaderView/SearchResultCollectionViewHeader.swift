@@ -30,49 +30,39 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
     let bookShelfView = UIView()
     let bookShelfImage = UIImageView()
     
-    lazy var recentBooksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
-    
-    let collectionViewLayout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 10
-        let deviceWidth = UIScreen.main.bounds.width
-        let countForLine: CGFloat = 1 // 행 개수
-        let itemHeight = 100.0
-        // (10)[사진](10)[사진](10)...[사진](10)
-        
-        layout.scrollDirection = .horizontal // default: vertical
-        layout.minimumLineSpacing = spacing // 행 간격
-        layout.minimumInteritemSpacing = 0 // 열 간격
-        layout.itemSize = .init(width: itemHeight * 0.7, height: itemHeight)
-        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        return layout
-    }()
-    
+//    lazy var recentBooksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+//    
+//    let collectionViewLayout: UICollectionViewFlowLayout = {
+//        let layout = UICollectionViewFlowLayout()
+//        let spacing: CGFloat = 10
+//        let deviceWidth = UIScreen.main.bounds.width
+//        let countForLine: CGFloat = 1 // 행 개수
+//        let itemHeight = 100.0
+//        // (10)[사진](10)[사진](10)...[사진](10)
+//        
+//        layout.scrollDirection = .horizontal // default: vertical
+//        layout.minimumLineSpacing = spacing // 행 간격
+//        layout.minimumInteritemSpacing = 0 // 열 간격
+//        layout.itemSize = .init(width: itemHeight * 0.7, height: itemHeight)
+//        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+//        return layout
+//    }()
+//    
     
     // MARK: - 헤더뷰 configure 함수
     // must conoduct
     func configureHeaderView(header: String) {
-        setCollectionView()
+        //        setCollectionView()
         setConstraints()
         configureUI(header: header)
-        // notification observer (임시)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.detailViewPresented, object: nil)
-    }
-    
-    // MARK: - Notification으로 실행시킬 함수
-    @objc func reloadSearchCollectionView() {
-        print("before: \(TenRecentBooks.shared.tenRecentBooks[0]?.title)")
-        self.recentBooksCollectionView.reloadData()
-        print("notification 작동함 🎬")
-        print("after: \(TenRecentBooks.shared.tenRecentBooks[0]?.title)")
     }
     
     // MARK: - 헤더뷰 configure 함수 상세
-    func setCollectionView() {
-        recentBooksCollectionView.dataSource = self
-        recentBooksCollectionView.delegate = self
-        recentBooksCollectionView.register(RecentBooksCollectionViewCell.self, forCellWithReuseIdentifier: RecentBooksCollectionViewCell.identifier)
-    }
+//    func setCollectionView() {
+//        recentBooksCollectionView.dataSource = self
+//        recentBooksCollectionView.delegate = self
+//        recentBooksCollectionView.register(RecentBooksCollectionViewCell.self, forCellWithReuseIdentifier: RecentBooksCollectionViewCell.identifier)
+//    }
     
     func setConstraints() {
         [firstTitleLabel].forEach {
@@ -102,7 +92,7 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
             }
         }
         
-        [recentBooksCollectionView].forEach {
+        [RecentBooksCollectionView.shared].forEach {
             bookShelfView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
@@ -141,7 +131,7 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
             $0.contentMode = .scaleToFill
         }
         
-        [recentBooksCollectionView].forEach {
+        [RecentBooksCollectionView.shared].forEach {
             $0.backgroundColor = Colors.bookShelfBgColor
         }
         
@@ -153,26 +143,26 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
     }
     
 }
-
-extension SearchResultCollectionViewHeader: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: RecentBooksCollectionViewCell.identifier,
-            for: indexPath
-        ) as? RecentBooksCollectionViewCell
-                
-        else {
-            return UICollectionViewCell()
-        }
-        print("configure cell")
-        cell.setConstraints()
-        cell.configureUI(TenRecentBooks.shared.tenRecentBooks[indexPath.row])
-        return cell
-    }
-    
-    
-}
+//
+//extension SearchResultCollectionViewHeader: UICollectionViewDataSource, UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 10
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(
+//            withReuseIdentifier: RecentBooksCollectionViewCell.identifier,
+//            for: indexPath
+//        ) as? RecentBooksCollectionViewCell
+//                
+//        else {
+//            return UICollectionViewCell()
+//        }
+//        print("configure cell")
+//        cell.setConstraints()
+//        cell.configureUI(TenRecentBooks.shared.tenRecentBooks[indexPath.row])
+//        return cell
+//    }
+//    
+//    
+//}
