@@ -11,8 +11,20 @@ import SnapKit
 class SearchViewController: UIViewController {
     
     // MARK: - API 데이터 변수
-    var library: Library?
-    var documents: [Document] = []
+    var library: Library? { // API 페이지 단위로만 저장됨
+        didSet {
+            if let documents = library?.documents {
+                self.documents.append(contentsOf: documents)
+            }
+        }
+    }
+    var documents: [Document] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.searchCollectionView.reloadData()
+            }
+        }
+    }
     
     // MARK: - UI components
     let bookSearchBar = UISearchBar()
@@ -45,55 +57,24 @@ class SearchViewController: UIViewController {
         configureUI()
         setCollectionView()
         bookSearchBar.delegate = self
-        // notification observer (임시)
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.presentedDetailView, object: nil)
     }
     
-//    // MARK: - Notification으로 실행시킬 함수
-//    @objc func reloadSearchCollectionView() {
-//        self.searchCollectionView.reloadData()
-//        print("notification 작동함 🎬")
-//    }
-    
-    
-    // MARK: - 데이터 함수
+    // MARK: - 데이터 로드 함수
     func fetchLibraryData(query: String, page: Int) {
         APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
             self.library = libraryResult
-            DispatchQueue.main.async {
-                self.searchCollectionView.reloadData()
-            }
         }
     }
     
-//    func appendNewDocumentData(query: String, page: Int) {
-//        APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
-//            let indexPath = IndexPath(item: self.documents.count - 1, section: 0)
-//            let newDocuments = libraryResult.documents
-//            self.documents.append(contentsOf: newDocuments)
-//            DispatchQueue.main.async {
-//                self.searchCollectionView.insertItems(at: [indexPath])
-//            }
-//        }
-//    }
-    
-    // MARK: - 기능 설정 함수
-    // 검색 기능
+    // MARK: - 검색 함수
     func conductSearch() {
+        self.documents = [] // 변수 초기화
+        APIManager.shared.page = 1 // 페이지 초기화
+        
         let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-        APIManager.shared.page = 1
+        
         fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-//        appendNewDocumentData(query: searchKeyword, page: APIManager.shared.page)
     }
-    
-//    // 무한스크롤 - 다음 페이지 데이터 append
-//    func appendNextPageData() {
-//        let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-//        APIManager.shared.page += 1
-//        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-//    }
-    
-    // MARK: - 키보드 관련 함수
     
     
     // MARK: - 레이아웃 설정 함수
@@ -127,7 +108,6 @@ class SearchViewController: UIViewController {
             // add Action
             $0.addAction(
                 UIAction { _ in
-//                    self.conductSearch()
                     self.searchBarSearchButtonClicked(self.bookSearchBar)
                 }
                 , for: .touchUpInside
@@ -158,42 +138,38 @@ class SearchViewController: UIViewController {
     }
     
     
-    
 }
 
 // MARK: - CollectionView 세팅 함수
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return library?.documents.count ?? 0
+        return documents.count
 //        return documents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: SearchResultCollectionViewCell.identifier,
-            for: indexPath) as? SearchResultCollectionViewCell,
-              let library = self.library
+            for: indexPath) as? SearchResultCollectionViewCell
         else {
             return UICollectionViewCell()
         }
         
         cell.setConstraints()
-        cell.configureUI(document: library.documents[indexPath.row])
-//        cell.configureUI(document: documents[indexPath.row])
+        cell.configureUI(document: self.documents[indexPath.row])
         
         return cell
     }
     
     // 아이템 선택 시 액션 설정
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let library = self.library else { return }
-        let detailViewController = DetailViewController(document: library.documents[indexPath.row])
+        let detailViewController = DetailViewController(document: self.documents[indexPath.row])
         
         // DetailView 모달 띄우기
         self.present(detailViewController, animated: true)
         
         // TenRecentBooks에 추가
-        TenRecentBooks.shared.appendNewBook(library.documents[indexPath.row])
+        TenRecentBooks.shared.appendNewBook(self.documents[indexPath.row])
         print("TenRecentBooks: \(TenRecentBooks.shared.tenRecentBooks)")
     }
     
@@ -213,13 +189,44 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return header
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        <#code#> // indexPath가 아니라 길이로 계산!
-//    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y             // 현재 스크롤 위치 (변동)
+        let contentHeight = scrollView.contentSize.height     // 컨텐츠 높이 (고정)
+        let viewHeight = scrollView.frame.size.height   // 스크롤뷰 높이 (고정)
+        let blankSpaceHeigt = position + viewHeight - contentHeight // 끝까지 스크롤하여 생긴 빈 공간 높이
+        
+        print("------------------------")
+//        print("🌈 position: \(position)")
+//        print("🌈 컨텐츠 높이: \(contentHeight)")
+//        print("🌈 뷰 높이: \(viewHeight)")
+        print("🌈 빈 공간 높이: \(blankSpaceHeigt)")
+        
+        if blankSpaceHeigt > 0 {
+            // 1. 현재 페이지가 마지막 페이지인지 확인
+            guard !(self.library?.meta.isEnd ?? true)
+                  
+            else {
+                print("📔 다음 페이지 없음")
+                return
+            }
+            
+            // 2. 페이지 + 1
+            APIManager.shared.page += 1
+            print("📔 다음 페이지: \(APIManager.shared.page)")
+            
+            // 3. 데이터 fetch
+            let searchKeyword = bookSearchBar.searchTextField.text ?? ""
+            fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
+        }
+        
+        
+    }
     
 }
 
+
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    // 헤더 높이 설정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 230)
     }
@@ -228,6 +235,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 
 extension SearchViewController: UISearchBarDelegate {
+    // searchBar에서 [검색(return)] 할 때 실행
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         conductSearch()
         searchBar.resignFirstResponder()

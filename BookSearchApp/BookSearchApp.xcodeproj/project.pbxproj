@@ -23,11 +23,11 @@
 		1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032B2BED55DA00311F97 /* LikeListTableViewCell.swift */; };
 		1ADF032E2BED693200311F97 /* NumberFormattingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032D2BED693200311F97 /* NumberFormattingManager.swift */; };
 		1ADF03302BED773900311F97 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF032F2BED773800311F97 /* AlertManager.swift */; };
-		1ADF03332BED89D600311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03322BED89D600311F97 /* SnapKit */; };
 		1ADF03352BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */; };
 		1ADF03392BEDCEB600311F97 /* TenRecentBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */; };
 		1ADF033B2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */; };
 		1ADF033D2BEDFD7F00311F97 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */; };
+		1ADF03402BEE0F4F00311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF033F2BEE0F4F00311F97 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ADF03332BED89D600311F97 /* SnapKit in Frameworks */,
+				1ADF03402BEE0F4F00311F97 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,9 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				1ADF02CB2BEA079900311F97 /* SearchViewController.swift */,
-				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
 				1ADF02D62BEA52F100311F97 /* SearchResultCollectionViewCell.swift */,
-				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
+				1ADF03432BEFE64100311F97 /* Header */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -175,6 +174,15 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		1ADF03432BEFE64100311F97 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
+				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -192,7 +200,7 @@
 			);
 			name = BookSearchApp;
 			packageProductDependencies = (
-				1ADF03322BED89D600311F97 /* SnapKit */,
+				1ADF033F2BEE0F4F00311F97 /* SnapKit */,
 			);
 			productName = BookSearchApp;
 			productReference = 1ADF02B42BEA074B00311F97 /* BookSearchApp.app */;
@@ -223,7 +231,7 @@
 			);
 			mainGroup = 1ADF02AB2BEA074B00311F97;
 			packageReferences = (
-				1ADF03312BED89D600311F97 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1ADF033E2BEE0F4F00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 1ADF02B52BEA074B00311F97 /* Products */;
 			projectDirPath = "";
@@ -470,7 +478,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1ADF03312BED89D600311F97 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		1ADF033E2BEE0F4F00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -481,9 +489,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1ADF03322BED89D600311F97 /* SnapKit */ = {
+		1ADF033F2BEE0F4F00311F97 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1ADF03312BED89D600311F97 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 1ADF033E2BEE0F4F00311F97 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
