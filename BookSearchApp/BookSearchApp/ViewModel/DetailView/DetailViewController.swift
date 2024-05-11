@@ -53,7 +53,7 @@ class DetailViewController: UIViewController {
         super.viewWillAppear(true)
         
         // notification post
-        NotificationCenter.default.post(name: Notification.Name.presentedDetailView, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.detailViewPresented, object: nil)
     }
     
     // MARK: - Layout & Design

@@ -28,6 +28,8 @@
 		1ADF033B2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */; };
 		1ADF033D2BEDFD7F00311F97 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */; };
 		1ADF03462BEFEC8400311F97 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADF03452BEFEC8400311F97 /* SnapKit */; };
+		1ADF03482BEFECEE00311F97 /* SearchResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF03472BEFECEE00311F97 /* SearchResultCollectionView.swift */; };
+		1ADF034D2BF00C1300311F97 /* RecentBooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenRecentBooks.swift; sourceTree = "<group>"; };
 		1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentBooksCollectionViewCell.swift; sourceTree = "<group>"; };
 		1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		1ADF03472BEFECEE00311F97 /* SearchResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionView.swift; sourceTree = "<group>"; };
+		1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentBooksCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				1ADF02CB2BEA079900311F97 /* SearchViewController.swift */,
-				1ADF02D62BEA52F100311F97 /* SearchResultCollectionViewCell.swift */,
-				1ADF03432BEFE64100311F97 /* Header */,
+				1ADF034B2BF00B4500311F97 /* SearchResultCollectionView */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -124,9 +127,8 @@
 			children = (
 				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
 				1ADF02E12BEB205B00311F97 /* BookModel.swift */,
-				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
-				1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */,
 				1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */,
+				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,13 +176,33 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		1ADF03432BEFE64100311F97 /* Header */ = {
+		1ADF03432BEFE64100311F97 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
 				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
+				1ADF034E2BF0103400311F97 /* RecentBooksCollectionView */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		1ADF034B2BF00B4500311F97 /* SearchResultCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF03472BEFECEE00311F97 /* SearchResultCollectionView.swift */,
+				1ADF02D62BEA52F100311F97 /* SearchResultCollectionViewCell.swift */,
+				1ADF03432BEFE64100311F97 /* HeaderView */,
+			);
+			path = SearchResultCollectionView;
+			sourceTree = "<group>";
+		};
+		1ADF034E2BF0103400311F97 /* RecentBooksCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */,
+				1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */,
 				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
 			);
-			path = Header;
+			path = RecentBooksCollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +283,7 @@
 				1ADF033D2BEDFD7F00311F97 /* NotificationName.swift in Sources */,
 				1ADF02E22BEB205B00311F97 /* BookModel.swift in Sources */,
 				1ADF03352BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift in Sources */,
+				1ADF034D2BF00C1300311F97 /* RecentBooksCollectionView.swift in Sources */,
 				1ADF033B2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift in Sources */,
 				1ADF02CC2BEA079900311F97 /* SearchViewController.swift in Sources */,
 				1ADF03302BED773900311F97 /* AlertManager.swift in Sources */,
@@ -272,6 +295,7 @@
 				1ADF032A2BED065D00311F97 /* CoreDataManager.swift in Sources */,
 				1ADF03392BEDCEB600311F97 /* TenRecentBooks.swift in Sources */,
 				1ADF02CE2BEA07A400311F97 /* LikeListViewController.swift in Sources */,
+				1ADF03482BEFECEE00311F97 /* SearchResultCollectionView.swift in Sources */,
 				1ADF032C2BED55DA00311F97 /* LikeListTableViewCell.swift in Sources */,
 				1ADF02D22BEA3D5700311F97 /* DetailViewController.swift in Sources */,
 				1ADF02B82BEA074B00311F97 /* AppDelegate.swift in Sources */,
