@@ -20,4 +20,6 @@ extension Notification.Name {
     static let searchConducted = Notification.Name("searchConducted")
     
     static let fetchNextLibraryData = Notification.Name("fetchLibraryData")
+    
+    static let setSearchBarFirstResponder = Notification.Name("setSearchBarFirstResponder") // becomeFirstResponder 메소드
 }

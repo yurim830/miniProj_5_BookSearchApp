@@ -28,6 +28,7 @@ class SearchViewController: UIViewController {
         bookSearchBar.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(presentDetailView), name: Notification.Name.tappedItem, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(fetchNextLibraryData), name: Notification.Name.fetchNextLibraryData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setSearchBarFirstResponder), name: Notification.Name.setSearchBarFirstResponder, object: nil)
     }
     
     
@@ -47,6 +48,11 @@ class SearchViewController: UIViewController {
         fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
         print("🎉🎉🎉🎉🎉fetchNextLibraryData")
     }
+    
+    @objc func setSearchBarFirstResponder() {
+        self.bookSearchBar.becomeFirstResponder()
+    }
+    
     
     // MARK: - 데이터 로드 함수
     func fetchLibraryData(query: String, page: Int) {
