@@ -10,81 +10,64 @@ import SnapKit
 
 class SearchViewController: UIViewController {
     
-    // MARK: - API 데이터 변수
-    var library: Library? { // API 페이지 단위로만 저장됨
-        didSet {
-            if let documents = library?.documents {
-                self.documents.append(contentsOf: documents)
-            }
-        }
-    }
-    var documents: [Document] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.searchCollectionView.reloadData()
-            }
-        }
-    }
+    static let shared = SearchViewController.self
+    
     
     // MARK: - UI components
     let bookSearchBar = UISearchBar()
     
     let searchButton = UIButton()
     
-    lazy var searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
     
-    let collectionViewLayout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 10
-        let deviceWidth = UIScreen.main.bounds.width
-        let countForLine: CGFloat = 2 // 한 줄에 넣고 싶은 아이템 개수
-        let itemWidth = (deviceWidth - 30 - (spacing * (countForLine - 1)) - 1) / countForLine
-        // 한 줄에 2개; (20)[사진 ](10)[사진 ](10)
-        // 1을 빼는 이유: 부동소수점 때문에 itemWidth가 실제보다 크게 나올 수 있기 때문
-        
-        layout.scrollDirection = .vertical // default: vertical
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        layout.itemSize = .init(width: itemWidth, height: itemWidth * 1.3)
-        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        return layout
-    }()
     
     // MARK: - override 함수
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
         configureUI()
-        setCollectionView()
         bookSearchBar.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(presentDetailView), name: Notification.Name.tappedItem, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchNextLibraryData), name: Notification.Name.fetchNextLibraryData, object: nil)
+    }
+    
+    
+    // MARK: - Notification으로 실행시킬 함수
+    @objc func presentDetailView(_ notification: Notification) {
+        print("🎉🎉🎉🎉🎉presentDetailView")
+        guard let userInfo = notification.userInfo else { return }
+        guard let document = userInfo["document"] as? Document else { return }
+        print("document 변환 성공")
+        let detailViewController = DetailViewController(document: document)
+        self.present(detailViewController, animated: true)
+    }
+    
+    @objc func fetchNextLibraryData(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let searchKeyword = userInfo["searchKeyword"] as? String else { return }
+        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
+        print("🎉🎉🎉🎉🎉fetchNextLibraryData")
     }
     
     // MARK: - 데이터 로드 함수
     func fetchLibraryData(query: String, page: Int) {
         APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
-            self.library = libraryResult
+            SearchResultCollectionView.shared.library = libraryResult
         }
     }
     
     // MARK: - 검색 함수
     func conductSearch() {
-        self.documents = [] // 변수 초기화
+        SearchResultCollectionView.shared.documents = [] // 변수 초기화
         APIManager.shared.page = 1 // 페이지 초기화
         
         let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-        
         fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
+        
+        NotificationCenter.default.post(name: Notification.Name.searchConducted, object: nil, userInfo: ["searchKeyword" : searchKeyword])
     }
     
     
     // MARK: - 레이아웃 설정 함수
-    func setCollectionView() {
-        searchCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
-        searchCollectionView.register(SearchResultCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchResultCollectionViewHeader.identifier)
-        searchCollectionView.dataSource = self
-        searchCollectionView.delegate = self
-        
-    }
     
     func setConstraints() {
         [bookSearchBar].forEach {
@@ -114,7 +97,7 @@ class SearchViewController: UIViewController {
             )
         }
         
-        [searchCollectionView].forEach {
+        [SearchResultCollectionView.shared].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.snp.makeConstraints {
@@ -127,7 +110,7 @@ class SearchViewController: UIViewController {
     }
     
     func configureUI() {
-        searchCollectionView.backgroundColor = Colors.backgroundColor
+        SearchResultCollectionView.shared.backgroundColor = Colors.backgroundColor
         
         [searchButton].forEach {
             $0.setTitle("검색", for: .normal)
@@ -138,98 +121,6 @@ class SearchViewController: UIViewController {
     }
     
     
-}
-
-// MARK: - CollectionView 세팅 함수
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return documents.count
-//        return documents.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SearchResultCollectionViewCell.identifier,
-            for: indexPath) as? SearchResultCollectionViewCell
-        else {
-            return UICollectionViewCell()
-        }
-        
-        cell.setConstraints()
-        cell.configureUI(document: self.documents[indexPath.row])
-        
-        return cell
-    }
-    
-    // 아이템 선택 시 액션 설정
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailViewController = DetailViewController(document: self.documents[indexPath.row])
-        
-        // DetailView 모달 띄우기
-        self.present(detailViewController, animated: true)
-        
-        // TenRecentBooks에 추가
-        TenRecentBooks.shared.appendNewBook(self.documents[indexPath.row])
-        print("TenRecentBooks: \(TenRecentBooks.shared.tenRecentBooks)")
-    }
-    
-    // 헤더 불러오고 사용하기
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader, // 헤더일때
-              let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: SearchResultCollectionViewHeader.identifier,
-                for: indexPath
-              ) as? SearchResultCollectionViewHeader else {return UICollectionReusableView()}
-        
-        let searchBarText = bookSearchBar.text
-        let headerText = (searchBarText != nil && searchBarText != "") ? "🔍 검색 결과" : ""
-        
-        header.configureHeaderView(header: headerText)
-        return header
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let position = scrollView.contentOffset.y             // 현재 스크롤 위치 (변동)
-        let contentHeight = scrollView.contentSize.height     // 컨텐츠 높이 (고정)
-        let viewHeight = scrollView.frame.size.height   // 스크롤뷰 높이 (고정)
-        let blankSpaceHeigt = position + viewHeight - contentHeight // 끝까지 스크롤하여 생긴 빈 공간 높이
-        
-        print("------------------------")
-//        print("🌈 position: \(position)")
-//        print("🌈 컨텐츠 높이: \(contentHeight)")
-//        print("🌈 뷰 높이: \(viewHeight)")
-        print("🌈 빈 공간 높이: \(blankSpaceHeigt)")
-        
-        if blankSpaceHeigt > 0 {
-            // 1. 현재 페이지가 마지막 페이지인지 확인
-            guard !(self.library?.meta.isEnd ?? true)
-                  
-            else {
-                print("📔 다음 페이지 없음")
-                return
-            }
-            
-            // 2. 페이지 + 1
-            APIManager.shared.page += 1
-            print("📔 다음 페이지: \(APIManager.shared.page)")
-            
-            // 3. 데이터 fetch
-            let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-            fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-        }
-        
-        
-    }
-    
-}
-
-
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
-    // 헤더 높이 설정
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 230)
-    }
 }
 
 

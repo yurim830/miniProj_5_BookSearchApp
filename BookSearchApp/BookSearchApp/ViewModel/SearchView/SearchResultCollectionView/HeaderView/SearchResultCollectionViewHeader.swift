@@ -56,7 +56,7 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
         setConstraints()
         configureUI(header: header)
         // notification observer (임시)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.presentedDetailView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.detailViewPresented, object: nil)
     }
     
     // MARK: - Notification으로 실행시킬 함수
