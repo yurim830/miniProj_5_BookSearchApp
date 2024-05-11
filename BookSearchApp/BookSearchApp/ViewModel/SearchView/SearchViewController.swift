@@ -11,7 +11,13 @@ import SnapKit
 class SearchViewController: UIViewController {
     
     // MARK: - API 데이터 변수
-    var library: Library?
+    var library: Library? { // API 페이지 단위로만 저장됨
+        didSet {
+            if let documents = library?.documents {
+                self.documents.append(contentsOf: documents)
+            }
+        }
+    }
     var documents: [Document] = []
     
     // MARK: - UI components
@@ -48,7 +54,7 @@ class SearchViewController: UIViewController {
     }
     
     // MARK: - 데이터 함수
-    func fetchLibraryData(query: String, page: Int) {
+    func appendLibraryData(query: String, page: Int) {
         APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
             self.library = libraryResult
             DispatchQueue.main.async {
@@ -57,34 +63,16 @@ class SearchViewController: UIViewController {
         }
     }
     
-//    func appendNewDocumentData(query: String, page: Int) {
-//        APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
-//            let indexPath = IndexPath(item: self.documents.count - 1, section: 0)
-//            let newDocuments = libraryResult.documents
-//            self.documents.append(contentsOf: newDocuments)
-//            DispatchQueue.main.async {
-//                self.searchCollectionView.insertItems(at: [indexPath])
-//            }
-//        }
-//    }
+    
     
     // MARK: - 기능 설정 함수
     // 검색 기능
     func conductSearch() {
+        self.documents = [] // 변수 초기화
         let searchKeyword = bookSearchBar.searchTextField.text ?? ""
         APIManager.shared.page = 1
-        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-//        appendNewDocumentData(query: searchKeyword, page: APIManager.shared.page)
+        appendLibraryData(query: searchKeyword, page: APIManager.shared.page)
     }
-    
-//    // 무한스크롤 - 다음 페이지 데이터 append
-//    func appendNextPageData() {
-//        let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-//        APIManager.shared.page += 1
-//        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-//    }
-    
-    // MARK: - 키보드 관련 함수
     
     
     // MARK: - 레이아웃 설정 함수
@@ -118,7 +106,6 @@ class SearchViewController: UIViewController {
             // add Action
             $0.addAction(
                 UIAction { _ in
-//                    self.conductSearch()
                     self.searchBarSearchButtonClicked(self.bookSearchBar)
                 }
                 , for: .touchUpInside
@@ -154,36 +141,33 @@ class SearchViewController: UIViewController {
 // MARK: - CollectionView 세팅 함수
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return library?.documents.count ?? 0
+        return documents.count
 //        return documents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: SearchResultCollectionViewCell.identifier,
-            for: indexPath) as? SearchResultCollectionViewCell,
-              let library = self.library
+            for: indexPath) as? SearchResultCollectionViewCell
         else {
             return UICollectionViewCell()
         }
         
         cell.setConstraints()
-        cell.configureUI(document: library.documents[indexPath.row])
-//        cell.configureUI(document: documents[indexPath.row])
+        cell.configureUI(document: self.documents[indexPath.row])
         
         return cell
     }
     
     // 아이템 선택 시 액션 설정
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let library = self.library else { return }
-        let detailViewController = DetailViewController(document: library.documents[indexPath.row])
+        let detailViewController = DetailViewController(document: self.documents[indexPath.row])
         
         // DetailView 모달 띄우기
         self.present(detailViewController, animated: true)
         
         // TenRecentBooks에 추가
-        TenRecentBooks.shared.appendNewBook(library.documents[indexPath.row])
+        TenRecentBooks.shared.appendNewBook(self.documents[indexPath.row])
         print("TenRecentBooks: \(TenRecentBooks.shared.tenRecentBooks)")
     }
     
@@ -216,6 +200,9 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         print("------------------------")
         
         if blankSpaceHeigt > 0 {
+            guard self.library?.meta.isEnd ?? false else {
+                return
+            }
             
         }
         
