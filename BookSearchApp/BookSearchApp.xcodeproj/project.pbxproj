@@ -101,9 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				1ADF02CB2BEA079900311F97 /* SearchViewController.swift */,
-				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
 				1ADF02D62BEA52F100311F97 /* SearchResultCollectionViewCell.swift */,
-				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
+				1ADF03432BEFE64100311F97 /* Header */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -173,6 +172,15 @@
 				1ADF032F2BED773800311F97 /* AlertManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		1ADF03432BEFE64100311F97 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
+				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
