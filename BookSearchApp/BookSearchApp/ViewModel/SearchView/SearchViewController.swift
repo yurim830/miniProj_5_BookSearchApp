@@ -194,35 +194,29 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         let contentHeight = scrollView.contentSize.height     // 컨텐츠 높이 (고정)
         let viewHeight = scrollView.frame.size.height   // 스크롤뷰 높이 (고정)
         let blankSpaceHeigt = position + viewHeight - contentHeight // 끝까지 스크롤하여 생긴 빈 공간 높이
-       
-        print("🌈 position: \(position)")
-        print("🌈 컨텐츠 높이: \(contentHeight)")
-        print("🌈 뷰 높이: \(viewHeight)")
-        print("✨ 빈 공간 높이: \(blankSpaceHeigt)")
+        
         print("------------------------")
+//        print("🌈 position: \(position)")
+//        print("🌈 컨텐츠 높이: \(contentHeight)")
+//        print("🌈 뷰 높이: \(viewHeight)")
+        print("🌈 빈 공간 높이: \(blankSpaceHeigt)")
         
         if blankSpaceHeigt > 0 {
             // 1. 현재 페이지가 마지막 페이지인지 확인
             guard !(self.library?.meta.isEnd ?? true)
                   
             else {
-                print("다음 페이지 없음")
+                print("📔 다음 페이지 없음")
                 return
             }
             
-            
-            print("다음 페이지 있음")
             // 2. 페이지 + 1
             APIManager.shared.page += 1
-            print("다음 페이지: \(APIManager.shared.page)")
+            print("📔 다음 페이지: \(APIManager.shared.page)")
             
             // 3. 데이터 fetch
             let searchKeyword = bookSearchBar.searchTextField.text ?? ""
             fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-            
-            // 4. 컬렉션뷰에 item insert
-            let indexPath = searchCollectionView.accessibilityElementCount()
-            print("elementCount: \(indexPath)")
         }
         
         
