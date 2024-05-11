@@ -15,7 +15,6 @@ class RecentBooksCollectionView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: self.layout)
         setCollectionView()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSelf), name: Notification.Name.detailViewPresented, object: nil)
-       
     }
     
     required init?(coder: NSCoder) {
@@ -82,6 +81,20 @@ extension RecentBooksCollectionView: UICollectionViewDataSource {
         cell.configureUI(TenRecentBooks.shared.tenRecentBooks[indexPath.row])
         return cell
     }
-    
-    
+}
+
+extension RecentBooksCollectionView: UICollectionViewDelegate {
+    // 아이템 클릭 시 액션 설정 -- 실행이 안 됨...
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print("item selected!!!!!!!!")
+        
+        guard let document = TenRecentBooks.shared.tenRecentBooks[indexPath.row] else { return }
+        
+        // DetailView 모달 띄우라는 notification Post
+        NotificationCenter.default.post(name: Notification.Name.tappedItem, object: nil, userInfo: ["document" : document])
+        
+        // TenRecentBooks에 추가
+        TenRecentBooks.shared.appendNewBook(document)
+    }
 }

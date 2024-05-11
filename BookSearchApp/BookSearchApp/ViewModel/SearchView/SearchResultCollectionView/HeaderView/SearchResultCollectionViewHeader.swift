@@ -33,7 +33,6 @@ class SearchResultCollectionViewHeader: UICollectionReusableView {
     // MARK: - 헤더뷰 configure 함수
     // must conoduct
     func configureHeaderView(header: String) {
-        //        setCollectionView()
         setConstraints()
         configureUI(header: header)
     }
