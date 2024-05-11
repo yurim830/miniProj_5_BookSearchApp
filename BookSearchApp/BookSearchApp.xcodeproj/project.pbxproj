@@ -128,7 +128,6 @@
 				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
 				1ADF02E12BEB205B00311F97 /* BookModel.swift */,
 				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
-				1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */,
 				1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */,
 			);
 			path = Model;
@@ -181,8 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				1ADF03342BED8A5E00311F97 /* SearchResultCollectionViewHeader.swift */,
-				1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */,
-				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
+				1ADF034E2BF0103400311F97 /* RecentBooksCollectionView */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -195,6 +193,16 @@
 				1ADF03432BEFE64100311F97 /* HeaderView */,
 			);
 			path = SearchResultCollectionView;
+			sourceTree = "<group>";
+		};
+		1ADF034E2BF0103400311F97 /* RecentBooksCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1ADF03382BEDCEB600311F97 /* TenRecentBooks.swift */,
+				1ADF034C2BF00C1300311F97 /* RecentBooksCollectionView.swift */,
+				1ADF033A2BEDD48F00311F97 /* RecentBooksCollectionViewCell.swift */,
+			);
+			path = RecentBooksCollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

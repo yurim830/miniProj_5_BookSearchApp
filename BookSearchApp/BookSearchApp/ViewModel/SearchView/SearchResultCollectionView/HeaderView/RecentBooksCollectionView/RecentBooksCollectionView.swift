@@ -14,7 +14,7 @@ class RecentBooksCollectionView: UICollectionView {
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: self.layout)
         setCollectionView()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.detailViewPresented, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSelf), name: Notification.Name.detailViewPresented, object: nil)
        
     }
     
@@ -24,10 +24,8 @@ class RecentBooksCollectionView: UICollectionView {
     
     
     // MARK: - Notification으로 실행시킬 함수
-    @objc func reloadSearchCollectionView() {
-        print("before: \(TenRecentBooks.shared.tenRecentBooks[0]?.title)")
+    @objc func reloadSelf() {
         self.reloadData()
-        print("after: \(TenRecentBooks.shared.tenRecentBooks[0]?.title)")
     }
     
     
