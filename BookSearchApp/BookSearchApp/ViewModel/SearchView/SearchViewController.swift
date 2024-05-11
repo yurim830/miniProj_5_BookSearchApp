@@ -53,25 +53,22 @@ class SearchViewController: UIViewController {
         bookSearchBar.delegate = self
     }
     
-    // MARK: - 데이터 함수
-    func appendLibraryData(query: String, page: Int) {
+    // MARK: - 데이터 로드 및 append 함수
+    func fetchLibraryData(query: String, page: Int) {
         APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
             self.library = libraryResult
-            DispatchQueue.main.async {
-                self.searchCollectionView.reloadData()
-            }
         }
     }
     
-    
-    
-    // MARK: - 기능 설정 함수
-    // 검색 기능
+    // MARK: - 검색 함수
     func conductSearch() {
         self.documents = [] // 변수 초기화
+        APIManager.shared.page = 1 // 페이지 초기화
         let searchKeyword = bookSearchBar.searchTextField.text ?? ""
-        APIManager.shared.page = 1
-        appendLibraryData(query: searchKeyword, page: APIManager.shared.page)
+        fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
+        DispatchQueue.main.async {
+            self.searchCollectionView.reloadData()
+        }
     }
     
     
@@ -196,14 +193,31 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         print("🌈 position: \(position)")
         print("🌈 컨텐츠 높이: \(contentHeight)")
         print("🌈 뷰 높이: \(viewHeight)")
-        print("✨ 빈 공간 높이(frame): \(blankSpaceHeigt)")
+        print("✨ 빈 공간 높이: \(blankSpaceHeigt)")
         print("------------------------")
         
         if blankSpaceHeigt > 0 {
-            guard self.library?.meta.isEnd ?? false else {
+            // 1. 현재 페이지가 마지막 페이지인지 확인
+            guard !(self.library?.meta.isEnd ?? true)
+                  
+            else {
+                print("다음 페이지 없음")
                 return
             }
             
+            
+            print("다음 페이지 있음")
+            // 2. 페이지 + 1
+            APIManager.shared.page += 1
+            print("다음 페이지: \(APIManager.shared.page)")
+            
+            // 3. 데이터 fetch
+            let searchKeyword = bookSearchBar.searchTextField.text ?? ""
+            fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
+            
+            // 4. 컬렉션뷰에 item insert
+            let indexPath = searchCollectionView.accessibilityElementCount()
+            print("elementCount: \(indexPath)")
         }
         
         
