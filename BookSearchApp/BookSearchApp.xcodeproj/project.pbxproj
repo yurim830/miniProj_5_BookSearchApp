@@ -127,8 +127,8 @@
 			children = (
 				1ADF02D92BEA8F1B00311F97 /* Colors.swift */,
 				1ADF02E12BEB205B00311F97 /* BookModel.swift */,
-				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
 				1ADF033C2BEDFD7F00311F97 /* NotificationName.swift */,
+				1ADF03252BED05BD00311F97 /* BookCoreDataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
