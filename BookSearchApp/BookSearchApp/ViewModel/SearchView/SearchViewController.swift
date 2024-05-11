@@ -18,7 +18,13 @@ class SearchViewController: UIViewController {
             }
         }
     }
-    var documents: [Document] = []
+    var documents: [Document] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.searchCollectionView.reloadData()
+            }
+        }
+    }
     
     // MARK: - UI components
     let bookSearchBar = UISearchBar()
@@ -53,7 +59,7 @@ class SearchViewController: UIViewController {
         bookSearchBar.delegate = self
     }
     
-    // MARK: - 데이터 로드 및 append 함수
+    // MARK: - 데이터 로드 함수
     func fetchLibraryData(query: String, page: Int) {
         APIManager.shared.fetchLibraryData(query: query, page: page) { libraryResult in
             self.library = libraryResult
@@ -64,11 +70,10 @@ class SearchViewController: UIViewController {
     func conductSearch() {
         self.documents = [] // 변수 초기화
         APIManager.shared.page = 1 // 페이지 초기화
+        
         let searchKeyword = bookSearchBar.searchTextField.text ?? ""
+        
         fetchLibraryData(query: searchKeyword, page: APIManager.shared.page)
-        DispatchQueue.main.async {
-            self.searchCollectionView.reloadData()
-        }
     }
     
     
