@@ -45,16 +45,7 @@ class SearchViewController: UIViewController {
         configureUI()
         setCollectionView()
         bookSearchBar.delegate = self
-        // notification observer (임시)
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadSearchCollectionView), name: Notification.Name.presentedDetailView, object: nil)
     }
-    
-//    // MARK: - Notification으로 실행시킬 함수
-//    @objc func reloadSearchCollectionView() {
-//        self.searchCollectionView.reloadData()
-//        print("notification 작동함 🎬")
-//    }
-    
     
     // MARK: - 데이터 함수
     func fetchLibraryData(query: String, page: Int) {
@@ -158,7 +149,6 @@ class SearchViewController: UIViewController {
     }
     
     
-    
 }
 
 // MARK: - CollectionView 세팅 함수
@@ -213,13 +203,30 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return header
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        <#code#> // indexPath가 아니라 길이로 계산!
-//    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y             // 현재 스크롤 위치 (변동)
+        let contentHeight = scrollView.contentSize.height     // 컨텐츠 높이 (고정)
+        let viewHeight = scrollView.frame.size.height   // 스크롤뷰 높이 (고정)
+        let blankSpaceHeigt = position + viewHeight - contentHeight // 끝까지 스크롤하여 생긴 빈 공간 높이
+       
+        print("🌈 position: \(position)")
+        print("🌈 컨텐츠 높이: \(contentHeight)")
+        print("🌈 뷰 높이: \(viewHeight)")
+        print("✨ 빈 공간 높이(frame): \(blankSpaceHeigt)")
+        print("------------------------")
+        
+        if blankSpaceHeigt > 0 {
+            
+        }
+        
+        
+    }
     
 }
 
+
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    // 헤더 높이 설정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 230)
     }
@@ -228,6 +235,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 
 extension SearchViewController: UISearchBarDelegate {
+    // searchBar에서 [검색(return)] 할 때 실행
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         conductSearch()
         searchBar.resignFirstResponder()
