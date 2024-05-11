@@ -352,4 +352,5 @@ class DetailViewController: UIViewController {
             for: .touchUpInside
         )
     }
+    
 }
